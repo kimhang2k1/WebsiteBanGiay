@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
+.active__image__detail {
+    border: 2px solid black;
+}
+.active__size {
+    background-color: teal;
+    color: white;
+}
+*:focus {
+    outline: none;
+}
+.leading-20 {
+    line-height: 5rem;
+}
+.leading-12 {
+    line-height: 3rem;
+}
+.inset-4 {
+    top: 20px;
+    left: 82%;
+}
+.text-14 {
+    font-size: 14px;
+}
+.bg-darkred {
+    background-color: darkred;
+}
+.text-10xl {
+    font-size: 1.5rem;
+    line-height: 1rem;
+}
+.cart:hover .list-cart {
+    display: block;
+    z-index: 999;
+    border: 1px solid #ccc;
+}
+.w-35 {
+    width: 35%;
+}
+.inset-5 {
+    top: 1.5rem;
+    left: -6rem;
+}
+.w-125 {
+    width: 125px;
+}
+.bg-c30005 {
+    background-color: #c30005;
+}
+.inset-16 {
+    top: 97px;
+    left: 14.75rem;
+}
+.inset-17 {
+    top: 8rem;
+}
+.product li:hover .menu-product {
+    display: block;
+    top: 3rem;
+    left: 18rem;
+}
+.menu-product li:hover {
+    background-color: gray;
+    color: white;
+}
+.pk {
+    position: absolute;
+    top: 97px;
+    left: 14.95rem;
+    z-index: 999;
+    background-color: white;
+    width: 15rem;
+    display: none;
+    color: black;
+    border: 1px solid #ccc;
+}
+.menu-product li:hover .pk {
+    display: block;
+}
+.h-120 {
+    height: 24rem;
+    width: 38rem;
+}
+.h-37 {
+    height: 36rem;
+}
+.w-120 {
+    width: 30%;
+}
+.tl {
+    top: 10rem;
+    left: 5rem;
+}
+.text-18 {
+    font-size: 18px;
+}
+
+.category:hover .btn-preview {
+    visibility: visible;
+}
+.category:hover .shoes {
+    visibility: visible;
+}
+.item_product:hover .btn_add_cart {
+    visibility: visible;
+}
+.w-124 {
+    width: 24%;
+}
+.bg-steelblue {
+    background-color: steelblue;
+}
+.bg-cornflowerblue {
+    background-color: cornflowerblue;
+}
+.bg-3b6994 {
+    background-color: #3b6994;
+}
+.bg-3a589d {
+    background-color: #3a589d;
+}
+.bg-2478ba {
+    background-color: #2478ba;
+}
+.bg-darkorange {
+    background-color: darkorange;
+}
+.bg-brown {
+    background-color: brown;
+}
+.tab button:hover {
+    border-bottom: 2px solid black;
+}
+.tab button.active {
+    border-bottom: 2px solid black;
+}
+.star li:hover {
+    color: orange;
+}
+.star li.active {
+    color: orange;
+}
+.bg-12283e {
+    background-color: #12283e;
+}
+.account li:hover .account-1 {
+    display: block;
+}
+.cart:hover {
+    background-color: teal;
+    color: white;
+    border: none;
+}
+.bg-13283f {
+    background-color: #13283f;
+}
+.bg-f9f9f9 {
+    background-color: #f9f9f9;
+}
+.leading-20 {
+    line-height: 5rem;
+}
+.tag_address:hover {
+    border-bottom: 2px solid black;
+}
+.tab_address.active {
+    border-bottom: 2px solid black;
+}
+.border-13283f {
+    border: 2px solid #13283f;
+}
+.text-13283f {
+    color: #13283f;
+}
+div br {
+    display: none;
+}
