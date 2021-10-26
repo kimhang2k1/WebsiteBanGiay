@@ -22,6 +22,7 @@ function getDistrict(IDThanhPho) {
     tab_content = document.getElementsByClassName("tab_content");
     tab_address = document.getElementsByClassName("tab_address");
     $(`#district_address`).text("");
+    $(`#village`).text("");
     $.ajax({
         method: "GET",
         url: "/get-district",
@@ -35,6 +36,8 @@ function getDistrict(IDThanhPho) {
             document
                 .getElementById(IDThanhPho + "TP")
                 .innerHTML.replaceAll(/(\r\n|\n|\r)/gm, " ");
+            document.getElementById("city_address").value =
+                document.getElementById(IDThanhPho + "TP").value;
         },
     });
 
@@ -77,6 +80,8 @@ function getCommune(IDQuan) {
             document.getElementById("commune").innerHTML = response;
             document.getElementById("district_address").innerText =
                 document.getElementById(IDQuan + "district").innerText + " ,";
+            document.getElementById("district_address").value =
+                document.getElementById(IDQuan + "district").value;
         },
     });
     tab_address[2].style.pointerEvents = "auto";
@@ -117,25 +122,66 @@ function getValue(IDXa) {
     document.getElementById("village").innerText = document.getElementById(
         IDXa + "commune"
     ).innerText;
+    document.getElementById("village").value = document.getElementById(
+        IDXa + "commune"
+    ).value;
     document.getElementById("box_address").style.display = "none";
 }
 
-function addToAddress(IDThanhPho, IDQuan, IDXa) {
+function addToAddress(event) {
+    event.preventDefault();
     $.ajax({
         method: "GET",
-        url: "add-address-customer",
+        url: "/add-address-customer",
         data: {
-            HoTen: document.getElementsByName("customer_name").value,
-            SDT: document.getElementsByName("customer_phone").value,
-            IDThanhPho: document.getElementById(IDThanhPho + "TP").value,
-            IDQuan: document.getElementById(IDQuan + "district").value,
-            IDThanhPho: document.getElementById(IDXa + "commune").value,
-            SoNha: document.getElementsByName("apartment_number").value,
+            HoTen: document.getElementsByName("HoTen")[0].value,
+            SDT: document.getElementsByName("SDT")[0].value,
+            IDThanhPho: document.getElementById("city_address").value,
+            IDQuan: document.getElementById("district_address").value,
+            IDXa: document.getElementById("village").value,
+            SoNha: document.getElementsByName("SoNha")[0].value,
         },
         success: function (response) {
-            document.getElementsByClassName("form-add-cart")[0].style.display =
-                "none";
-            $("#allMyAddress").html(response);
+            if ($.isEmptyObject(response.error)) {
+                document.getElementsByClassName(
+                    "form-add-cart"
+                )[0].style.display = "none";
+                document.getElementsByClassName("content")[0].style.display =
+                    "none";
+
+                $("#allMyAddress").html(response.view);
+            } else {
+                printErrorMsg(response.error);
+            }
         },
     });
+}
+function printErrorMsg(msg) {
+    $(".print-error-msg").find("ul").html("");
+    $(".print-error-msg").css("display", "block");
+    $.each(msg, function (key, value) {
+        $(".print-error-msg")
+            .find("ul")
+            .append("<li>" + value + "</li>");
+    });
+}
+
+function stateHandle() {
+    var inp = document.querySelectorAll(".check");
+    var city = document.getElementById("city_address");
+    var district = document.getElementById("district_address");
+    var commune = document.getElementById("village");
+    var btn = document.getElementsByClassName("btn_add")[0];
+    if (
+        inp[0].value == "" ||
+        inp[1].value == "" ||
+        (inp[2].value == "" && city.value == "") ||
+        district.value == "" ||
+        commune.value == ""
+    ) {
+        btn.disabled = true;
+    } else {
+        btn.style.cursor = "pointer";
+        btn.disabled = false;
+    }
 }

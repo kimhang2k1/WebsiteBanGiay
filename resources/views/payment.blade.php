@@ -101,10 +101,15 @@
     </div>
     <div class="content w-full h-screen fixed top-0 right-0 bg-black bg-opacity-50 hidden">
         @include('/component/box_cart')
+
         @include('/component/form_add_address', ['city' => $city, 'district'=>$district, 'commune'=> $commune])
+
     </div>
     @include('/component/footer')
 
 </body>
+<script>
+
+</script>
 
 </html>

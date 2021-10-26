@@ -58,6 +58,9 @@ Route::get('/payment', [User\PaymentController::class, 'getProductInCart']);
 Route::get('/get-district', [User\AddressController::class, 'getDistrict']);
 
 Route::get('/get-commune', [User\AddressController::class, 'getCommune']);
+
+Route::get('/add-address-customer', [User\AddressController::class, 'addAddressCustomer']);
+
 // Tài Khoản
 
 //Đăng Nhập
