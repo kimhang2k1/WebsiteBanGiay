@@ -117,3 +117,47 @@ function getSize(element, IDSize) {
             [index].classList.remove("active__size");
     element.classList.add("active__size");
 }
+
+function getStar(element, Rate) {
+    const star = document.getElementsByClassName("star_product");
+    document.getElementById("numberStar").value = Rate;
+    for (let index = 0; index < star.length; index++)
+        document
+            .getElementsByClassName("star_product")
+            [index].classList.remove("active_star_product");
+    element.classList.add("active_star_product");
+}
+
+function postCommentProduct(IDSanPham) {
+    $.ajax({
+        method: "GET",
+        url: "/post-comment-product",
+        data: {
+            Comment: document.getElementsByName("comment")[0].value,
+            NumberStar: document.getElementById("numberStar").value,
+            IDSanPham: IDSanPham,
+        },
+        success: function (response) {
+            $("#comment").html(response);
+            $(".rate").text("");
+        },
+    });
+}
+
+function getProduct() {
+    $.ajax({
+        method: "GET",
+        url: "/search-product",
+        data: {
+            Search: document.getElementsByName("search")[0].value,
+        },
+        success: function (response) {
+            document.getElementById("display-product").style.display = "block";
+            $("#display-product").html(response);
+            if (document.getElementsByName("search")[0].value == "") {
+                document.getElementById("display-product").style.display =
+                    "none";
+            }
+        },
+    });
+}

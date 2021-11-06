@@ -11,6 +11,9 @@
     background-color: teal;
     color: white;
 }
+.active_star_product {
+    color: orange;
+}
 *:focus {
     outline: none;
 }
@@ -142,9 +145,6 @@
 .star li:hover {
     color: orange;
 }
-.star li.active {
-    color: orange;
-}
 .bg-12283e {
     background-color: #12283e;
 }
@@ -177,3 +177,30 @@
 .text-13283f {
     color: #13283f;
 }
+.w-360 {
+    width: 90%;
+}
+table tr td {
+    line-height: 2rem;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+tr {
+    text-align: center;
+}
+
+th {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+td {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
+

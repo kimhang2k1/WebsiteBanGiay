@@ -41,12 +41,21 @@ use Illuminate\Support\Facades\Session;
                 <img src="/img/logo-mona.png" class="w-40">
             </div>
             <div class="w-3/5 flex space-x-4" style="line-height: 4rem;">
-                <div>
-                    <input type="text" name="" placeholder="Tìm kiếm" class="border border-gray-300 w-96 pl-4"
-                        style="height: 40px;">
-                    <button class="border border-green-600 bg-green-600 text-white w-24 h-12 leading-8" type="submit"
-                        style="margin-left:-4px;height: 40px;">Tìm Kiếm</button>
-                </div>
+                <form action="/search" method="GET" id="some_form">
+                    <div>
+                        <input type="text" name="search" id="mysearch" placeholder="Tìm kiếm" class="text-black caret-blue-500 focus:border-blue-500 
+                    border border-gray-300 w-96 pl-4" style="height: 40px;" oninput="getProduct()">
+                        <button class="border border-green-600 bg-green-600 text-white w-24 h-12 leading-8"
+                            type="submit" style="margin-left:-4px;height: 40px;">Tìm Kiếm</button>
+                        <div class="border border-gray-300 bg-white absolute hidden"
+                            style="width:30rem;top:6.5rem;z-index:1000;" id="display-product">
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 @if (session()->has('user'))
                 <?php
 
@@ -72,25 +81,13 @@ use Illuminate\Support\Facades\Session;
             </div>
         </div>
         <div class="w-full h-12 text-white">
-            <div class="menu w-1/2 m-auto leading-12">
+            <div class="menu w-full m-auto leading-12">
                 <ul class="product flex space-x-16 font-bold text-14 cursor-pointer justify-center relative">
                     <li><a href="{{ url('home')}}">TRANG CHỦ</a></li>
                     <li><a href="#">GIỚI THIỆU</a></li>
-                    <li><a href="{{ url('product')}}">SẢN PHẨM</a>
-                        <ul
-                            class=" menu-product border border-gray-300 absolute w-60 inset-17 hidden cursor-pointer text-black bg-white font-normal">
-                            <a href="{{ url('product/NSP00001') }}">
-                                <li class="pl-4 border-b border-gray-200">Giày Nữ</li>
-                            </a>
-                            <a href="{{ url('product/NSP00002') }}">
-                                <li class="pl-4 border-b border-gray-200">Giày Nam</li>
-                            </a>
-                            <a href="{{ url('product/NSP00003') }}">
-                                <li class="pl-4 border-b border-gray-200">Phụ Kiện Khác</li>
-                            </a>
-                        </ul>
-                    </li>
-                    <li><a href="#">TIN TỨC</a></li>
+                    <li><a href="{{ url('product/NSP00001') }}">GiÀY NỮ</a></li>
+                    <li><a href="{{ url('product/NSP00002') }}">GIÀY NAM</a></li>
+                    <li><a href="{{ url('product/NSP00003') }}">PHỤ KIỆN KHÁC</a></li>
                     <li><a href="#">LIÊN HỆ</a></li>
 
                 </ul>

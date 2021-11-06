@@ -11,16 +11,22 @@ class TaiKhoan extends Model
     protected $table = 'taikhoan';
     protected $fillable = [
         'IDTaiKhoan',
+        'Ten',
+        'SoDienThoai',
         'Email',
         'MatKhau',
     ];
     public static function create(
         $IDTaiKhoan,
+        $Ten,
+        $SoDienThoai,
         $Email,
         $MatKhau
     ) {
         $tk = new TaiKhoan();
         $tk->IDTaiKhoan = $IDTaiKhoan;
+        $tk->Ten = $Ten;
+        $tk->SoDienThoai = $SoDienThoai;
         $tk->Email = $Email;
         $tk->MatKhau = $MatKhau;
         $tk->save();

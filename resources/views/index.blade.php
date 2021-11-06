@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/tailwind.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/tab.js"></script>
+    <script src="./js/product.js"></script>
+
     <title>Mona Sneaker - Website Bán Giày Thể Thao Và Phụ Kiện Chính Hãng, Chất Lượng Cao</title>
 </head>
 
@@ -38,7 +41,7 @@
                             class="btn-preview w-full invisible transition h-full bg-black flex items-center justify-center bg-opacity-30 duration-700 ease-in-out absolute top-0 left-0">
                             <p
                                 class="border-2 border-black font-bold w-56 h-10 text-18 text-center bg-black text-white leading-8 tl">
-                                <a href="#">Xem Sản
+                                <a href="{{ url('product/NSP00002') }}">Xem Sản
                                     Phẩm</a>
                             </p>
                         </div>
@@ -54,7 +57,7 @@
                             class="btn-preview w-full invisible transition h-full bg-black flex items-center justify-center bg-opacity-30 duration-700 ease-in-out absolute top-0 left-0">
                             <p
                                 class="border-2 border-black font-bold w-56 h-10 text-18 text-center bg-black text-white leading-8 tl ">
-                                <a href="#">Xem Sản
+                                <a href="{{ url('product/NSP00001') }}">Xem Sản
                                     Phẩm</a>
                             </p>
                         </div>
@@ -70,7 +73,7 @@
                             class="btn-preview w-full invisible transition h-full bg-black flex items-center justify-center bg-opacity-30 duration-700 ease-in-out absolute top-0 left-0">
                             <p
                                 class="border-2 border-black font-bold w-56 h-10 text-18 text-center bg-black text-white leading-8 tl ">
-                                <a href="#">Xem Sản
+                                <a href="{{ url('product/NSP00003') }}">Xem Sản
                                     Phẩm</a>
                             </p>
                         </div>
@@ -250,7 +253,7 @@
         </div>
     </div>
     <div class="content w-full h-screen fixed top-0 right-0 bg-black bg-opacity-50 hidden" id="my-cart">
-        @include('/component/box_cart')
+        @include('/component/Cart/box_cart')
     </div>
     </div>
     @include('/component/footer')

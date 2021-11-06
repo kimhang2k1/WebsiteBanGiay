@@ -1,22 +1,29 @@
 function addToCart(IDSanPham) {
-    $.ajax({
-        method: "GET",
-        url: "/add-to-cart",
-        data: {
-            IDSanPham: IDSanPham,
-            IDSize: document.getElementById("idsize").value,
-            Number: document.getElementById("amount").value,
-        },
-        success: function (response) {
-            $("#my-cart").prepend(response.view);
-            $("#number-cart").html(response.num);
-            document.getElementsByClassName("box-cart")[0].style.display =
-                "block";
-            document.getElementsByClassName("content")[0].style.display =
-                "block";
-            document.body.style.overflow = "hidden";
-        },
-    });
+    if (document.getElementById("idsize").value == "") {
+        document.getElementsByClassName("error-size")[0].style.display =
+            "block";
+    } else {
+        $.ajax({
+            method: "GET",
+            url: "/add-to-cart",
+            data: {
+                IDSanPham: IDSanPham,
+                IDSize: document.getElementById("idsize").value,
+                Number: document.getElementById("amount").value,
+            },
+            success: function (response) {
+                $("#my-cart").prepend(response.view);
+                $("#number-cart").html(response.num);
+                document.getElementsByClassName("box-cart")[0].style.display =
+                    "block";
+                document.getElementsByClassName("content")[0].style.display =
+                    "block";
+                document.getElementsByClassName("error-size")[0].style.display =
+                    "none";
+                document.body.style.overflow = "hidden";
+            },
+        });
+    }
 }
 
 function increaseNumber(STT) {

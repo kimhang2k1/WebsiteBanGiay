@@ -65,6 +65,7 @@
                             </li>
                             @endforeach
                         </ul>
+                        <div class="error-size mt-4 text-red-500 text-sm hidden">Vui lòng chọn size giày của bạn </div>
                     </div>
                     <div class="w-full">
                         <p class="font-bold text-base">Số Lượng</p>
@@ -122,7 +123,9 @@
                 <div class=" tabcontent w-full mt-4 leading-9 hidden " id="review">
                     <div class="w-full">
                         <h2 class="font-bold text-base">Bình Luận</h2>
-                        <p>Chưa có bình luận nào.</p>
+                        <div class="w-full mt-4" id="comment">
+                            @include('/component/Product/AllComment', ['comment' => $comment])
+                        </div>
                     </div>
                     <div class="w-full border border-gray-300 p-4 mt-4">
                         <div class="w-full">
@@ -131,37 +134,36 @@
                         <div class="w-full mt-4">
                             <p class="font-bold">Đánh giá của bạn</p>
                             <ul class="star flex space-x-4 text-gray-300">
-                                <li class="border-r border-gray-300 pr-4"><i class="fas fa-star"></i></li>
-                                <li class="border-r border-gray-300 pr-4"><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i></li>
-                                <li class="border-r border-gray-300 pr-4"><i class="fas fa-star"></i><i
+                                <li class="star_product active border-r border-gray-300 pr-4"
+                                    onclick="getStar(this, '1')"><i class="fas fa-star"></i></li>
+                                <li class="star_product active border-r border-gray-300 pr-4"
+                                    onclick="getStar(this, '2')"><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </li>
+                                <li class="star_product active border-r border-gray-300 pr-4"
+                                    onclick="getStar(this, '3')"><i class="fas fa-star"></i><i
                                         class="fas fa-star"></i><i class="fas fa-star"></i>
                                 </li>
-                                <li class="border-r border-gray-300 pr-4"><i class="fas fa-star"></i><i
+                                <li class="star_product active border-r border-gray-300 pr-4"
+                                    onclick="getStar(this, '4')"><i class="fas fa-star"></i><i
                                         class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 </li>
-                                <li><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                        class="fas fa-star"></i><i class="fas fa-star"></i></li>
+                                <li class="star_product active " onclick="getStar(this, '5')"><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </li>
                             </ul>
                         </div>
+                        <input type="hidden" name="" id="numberStar" value="">
                         <div class="w-full">
                             <p class="font-bold mb-4">Nhận Xét Của Bạn *</p>
-                            <p><input type="text" name="" class="border border-gray-300 h-32" style="width: 50rem;">
+                            <p><input type="text" name="comment" class="rate border border-gray-300 h-32"
+                                    style="width: 50rem;">
                             </p>
-                        </div>
-                        <div class="w-full flex space-x-4">
-                            <div>
-                                <p class="font-bold">Tên *</p>
-                                <p><input type="text" class="border border-gray-300 w-96"></p>
-                            </div>
-                            <div>
-                                <p class="font-bold">Email *</p>
-                                <p><input type="text" class="border border-gray-300 w-96"></p>
-                            </div>
                         </div>
                         <div class="w-full mt-4">
                             <button type="submit"
-                                class="font-bold text-white bg-red-600 border border-red-600 w-24 text-sm h-8">GỬI
+                                class="font-bold text-white bg-red-600 border border-red-600 w-24 text-sm h-8"
+                                onclick="postCommentProduct('{{$product[0]->IDSanPham}}')">GỬI
                                 ĐI</button>
                         </div>
                     </div>
@@ -204,7 +206,7 @@
         </div>
     </div>
     <div class="content w-full h-screen fixed top-0 right-0 bg-black bg-opacity-50 hidden" id="my-cart">
-        @include('/component/box_cart')
+        @include('/component/Cart/box_cart')
     </div>
     @include('/component/footer')
 </body>

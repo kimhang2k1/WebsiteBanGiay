@@ -13,11 +13,16 @@ class RegisterController extends Controller
     public function createAccount(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'hoTen' => array('required', 'regex:/^([a-zA-ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$/i'),
+            'sdt' => array('required', 'regex:((09|03|07|08|05)+([0-9]{8})\b)'),
             'email' => array('required', 'email', 'unique:taikhoan'),
             'password' => array('required', 'min:6'),
             'password_clone' => array('required', 'same:password'),
         ], $message = [
-            'email.required' => 'Email không được để trống',
+            'hoTen.required' => 'Họ Tên không được để trống',
+            'sdt.required' => 'Số điện thoại không được để trống',
+            'hoTen.regex' => 'Họ Tên không đúng định dạng',
+            'sdt.regex' => 'Số điện thoại không đúng định dạng',
             'email.email' => 'Email không đúng định dạng',
             'email.unique' => 'Email đã tồn tại',
             'password.required' => 'Mật khẩu không được để trống',
@@ -40,6 +45,8 @@ class RegisterController extends Controller
                 $number++;
                 TaiKhoan::create(
                     'KH' . $number,
+                    $request->hoTen,
+                    $request->sdt,
                     $request->email,
                     md5($request->password)
                 );
@@ -51,6 +58,8 @@ class RegisterController extends Controller
                 $number++;
                 TaiKhoan::create(
                     'KH' . $number,
+                    $request->hoTen,
+                    $request->sdt,
                     $request->email,
                     md5($request->password)
                 );

@@ -6,19 +6,19 @@ function openDivAddress() {
 }
 
 function openDeliveryAddress() {
-    document.getElementsByClassName("form-add-cart")[0].style.display = "block";
-    document.getElementsByClassName("content")[0].style.display = "block";
+    document.getElementById("myModal").style.display = "block";
     document.body.style.overflow = "hidden";
 }
 
 function closeDeliveryAddress() {
-    document.getElementsByClassName("form-add-cart")[0].style.display = "none";
-    document.getElementsByClassName("content")[0].style.display = "none";
+    document.getElementById("myModal").style.display = "none";
     document.body.style.overflow = "scroll";
 }
+
 function getDistrict(IDThanhPho) {
     var tab_content, tab_address;
-
+    var inp = document.querySelectorAll(".check");
+    var btn = document.getElementsByClassName("btn_add")[0];
     tab_content = document.getElementsByClassName("tab_content");
     tab_address = document.getElementsByClassName("tab_address");
     $(`#district_address`).text("");
@@ -38,6 +38,16 @@ function getDistrict(IDThanhPho) {
                 .innerHTML.replaceAll(/(\r\n|\n|\r)/gm, " ");
             document.getElementById("city_address").value =
                 document.getElementById(IDThanhPho + "TP").value;
+            if (
+                inp[0].value == "" ||
+                inp[1].value == "" ||
+                inp[2].value == ""
+            ) {
+                btn.disabled = true;
+            } else {
+                btn.style.cursor = "pointer";
+                btn.disabled = false;
+            }
         },
     });
 
@@ -66,7 +76,8 @@ function getDistrict(IDThanhPho) {
 
 function getCommune(IDQuan) {
     var tab_content, tab_address;
-
+    var inp = document.querySelectorAll(".check");
+    var btn = document.getElementsByClassName("btn_add")[0];
     tab_address = document.getElementsByClassName("tab_address");
     tab_content = document.getElementsByClassName("tab_content");
     $(`#village`).text("");
@@ -82,6 +93,16 @@ function getCommune(IDQuan) {
                 document.getElementById(IDQuan + "district").innerText + " ,";
             document.getElementById("district_address").value =
                 document.getElementById(IDQuan + "district").value;
+            if (
+                inp[0].value == "" ||
+                inp[1].value == "" ||
+                inp[2].value == ""
+            ) {
+                btn.disabled = true;
+            } else {
+                btn.style.cursor = "pointer";
+                btn.disabled = false;
+            }
         },
     });
     tab_address[2].style.pointerEvents = "auto";
@@ -143,11 +164,8 @@ function addToAddress(event) {
         },
         success: function (response) {
             if ($.isEmptyObject(response.error)) {
-                document.getElementsByClassName(
-                    "form-add-cart"
-                )[0].style.display = "none";
-                document.getElementsByClassName("content")[0].style.display =
-                    "none";
+                document.getElementById("myModal").style.display = "none";
+                document.body.style.overflow = "scroll";
 
                 $("#allMyAddress").html(response.view);
             } else {
@@ -156,6 +174,7 @@ function addToAddress(event) {
         },
     });
 }
+
 function printErrorMsg(msg) {
     $(".print-error-msg").find("ul").html("");
     $(".print-error-msg").css("display", "block");
@@ -175,13 +194,35 @@ function stateHandle() {
     if (
         inp[0].value == "" ||
         inp[1].value == "" ||
-        (inp[2].value == "" && city.value == "") ||
-        district.value == "" ||
-        commune.value == ""
+        inp[2].value == "" ||
+        city.innerText == "" ||
+        district.innerText == "" ||
+        commune.innerText == ""
     ) {
         btn.disabled = true;
     } else {
         btn.style.cursor = "pointer";
         btn.disabled = false;
     }
+}
+
+function getAddressDefault() {
+    var radioAddress = document.getElementsByName("myAddress");
+    for (let index = 0; index < radioAddress.length; index++) {
+        if (radioAddress[index].checked) {
+            var IDDiaChi = radioAddress[index].value;
+        }
+    }
+    $.ajax({
+        method: "GET",
+        url: "/get-address-default",
+        data: {
+            IDDiaChi: IDDiaChi,
+        },
+        success: function (response) {
+            document.getElementById("allMyAddress").style.display = "none";
+            document.getElementById("addressDefault").style.display = "block";
+            $("#addressDefault").html(response);
+        },
+    });
 }

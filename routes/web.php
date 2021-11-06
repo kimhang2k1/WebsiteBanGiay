@@ -34,12 +34,21 @@ Route::get('/productByPrice', [User\ProductController::class, 'getProductByPrice
 
 Route::get('/sort', [User\ProductController::class, 'sortProduct']);
 
+
 // Chi tiết sản phẩm
 Route::get('/product_detail', function () {
     return view('product-detail');
 });
 
 Route::get('/product/product_detail/{id}&&{IDTH}', [User\ProductDetailController::class, 'getProductDetail']);
+
+Route::get('/post-comment-product', [User\ProductDetailController::class, 'postComment']);
+
+// Tìm kiếm sản phẩm
+
+Route::get('/search-product', [User\SearchProductController::class, 'getSearchProduct']);
+
+Route::get('/search', [User\SearchProductController::class, 'getInputSearch']);
 
 // Giỏ Hàng
 Route::get('/cart', [User\CartController::class, 'getCart']);
@@ -61,10 +70,31 @@ Route::get('/get-commune', [User\AddressController::class, 'getCommune']);
 
 Route::get('/add-address-customer', [User\AddressController::class, 'addAddressCustomer']);
 
+Route::get('/get-address-default', [User\AddressController::class, 'getAddressDefault']);
+
+Route::get('/check-out', [User\PaymentController::class, 'orderProduct']);
+
+// Profile 
+
+Route::get('/profile', [User\ProfileController::class, 'getProfile']);
+
+Route::get('/get-information-customer', [User\ProfileController::class, 'getInformationCustomer']);
+
+Route::get('/edit-address-customer', [User\AddressController::class, 'editAddressCustomer']);
+
+Route::get('/delete-address-customer', [User\ProfileController::class, 'deleteAddressCustomer']);
+
+Route::get('/edit-information-customer', [User\ProfileController::class, 'editInformationCustomer']);
+
+Route::post('/change-password-customer', [User\ProfileController::class, 'changePassword']);
+
+
+
 // Tài Khoản
 
 //Đăng Nhập
 Route::post('/handle-login', [User\LoginController::class, 'getAccount']);
+
 Route::get('/login', function () {
     $category = DB::table('nhomsanpham')->limit(3)->get();
     return view('login')->with('category', $category);
@@ -77,6 +107,36 @@ Route::get('dangxuat', function () {
 });
 // Đăng ký
 Route::post('/check-account', [User\RegisterController::class, 'createAccount']);
+
 Route::get('/register', function () {
     return view('register');
+});
+
+
+
+// Admin
+
+// Đăng Nhập
+
+Route::get('/admin/login', function () {
+    return view('/Admin/Login');
+});
+
+Route::get('/admin/home', function () {
+    return view('/Admin/Home');
+});
+Route::post('/process-login', [Admin\LoginController::class, 'getLogin']);
+
+// Quản lý
+
+Route::get('/admin/product-management', [Admin\ProductManagementController::class, 'getProductManagement']);
+
+Route::get('/admin/category-management', [Admin\CategoryManagementController::class, 'getCategoryManagement']);
+
+Route::get('/admin/order-management', function () {
+    return view('/Admin/OrderManagement');
+});
+
+Route::get('/admin/account-management', function () {
+    return view('/Admin/AccountManagement');
 });

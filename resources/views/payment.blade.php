@@ -11,21 +11,47 @@
     <link rel="stylesheet" href="./css/tailwind.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/tab.js"></script>
+    <script src="./js/product.js"></script>
     <script src="./js/event_address.js"></script>
-    <title>Document</title>
+    <title>Thanh Tóan - Mona Sneaker </title>
 </head>
 
 <body>
     @include('/component/header')
     <div class="w-full mt-4">
         <div class="w-4/5 m-auto">
-            <div class="default-address w-full border border-gray-300 p-4 leading-10 h-32">
-                @include('/component/default_address')
+            @if(count($address) < 0) @include('/component/box_cart') <div
+                class="form-add-cart w-2/5 m-auto border border-gray-300 p-4 absolute top-64 bg-white" id="myModal"
+                style="top:10rem;left:28rem;display: block;">
+                @include('/component/Address/form_add_address', ['city' => $city, 'district'=>$district, 'commune'=>
+                $commune])
+        </div>
 
-            </div>
-            <div class="delivery-address w-full border border-gray-300 p-4 mt-4 hidden" id="allMyAddress">
-                @include('/component/delivery_address')
-            </div>
+        @else
+        @if(count($addressDefault) > 0)
+        <div class="default-address w-full border border-gray-300 p-4 leading-10 h-32" id="addressDefault">
+            @include('/component/Address/default_address', ['addressDefault' => $addressDefault ])
+
+        </div>
+        <div class="delivery-address w-full border border-gray-300 p-4 mt-4 hidden" id="allMyAddress">
+            @include('/component/Address/delivery_address', ['address' => $address])
+        </div>
+        <div class="form-add-cart w-2/5 m-auto border border-gray-300 p-4 absolute top-64 bg-white" id="myModal"
+            style="top:10rem;left:28rem;display: none;">
+            @include('/component/Address/form_add_address', ['city' => $city, 'district'=>$district, 'commune'=>
+            $commune])
+        </div>
+        @else
+        <div class="default-address w-full border border-gray-300 p-4 leading-10 h-32 hidden" id="addressDefault">
+            @include('/component/Address/default_address', ['addressDefault' => $addressDefault ])
+
+        </div>
+        <div class="delivery-address w-full border border-gray-300 p-4 mt-4 block" id="allMyAddress">
+            @include('/component/Address/delivery_address', ['address' => $address])
+        </div>
+        @endif
+        @endif
+        <form method="GET" action="/check-out">
             <div class="w-full mt-4 border border-gray-300 border-b-0 p-4">
                 <div class="w-full flex">
                     <div class="w-3/5">
@@ -89,27 +115,33 @@
                     <div class="text-gray-500" style="font-size: 14px;">
                         <div>{{ number_format($sum) }}</div>
                         <div>32.000đ</div>
-                        <div class="text-red-600 text-xl">{{ number_format($sum + 32.000)}}</div>
+                        <div class="text-red-600 text-xl">{{ number_format($sum + 32000)}}</div>
                     </div>
                 </div>
                 <div class="w-full flex justify-end mt-4 pr-16">
                     <button class="w-48 h-8 border border-gray-300 bg-13283f text-white" type="submit">Đặt Hàng</button>
                 </div>
             </div>
-
-        </div>
+        </form>
     </div>
-    <div class="content w-full h-screen fixed top-0 right-0 bg-black bg-opacity-50 hidden">
-        @include('/component/box_cart')
-
-        @include('/component/form_add_address', ['city' => $city, 'district'=>$district, 'commune'=> $commune])
-
     </div>
+
+
     @include('/component/footer')
-
+    <div class="content w-full h-screen fixed top-0 right-0 bg-black bg-opacity-50" style="display: none;">
+        @include('/component/Cart/box_cart')
+    </div>
+    @if(count($address) > 0)
+    <div class="form-add-cart w-2/5 m-auto border border-gray-300 p-4 absolute top-64 bg-white" id="myModal"
+        style="top:10rem;left:28rem;display: none;">
+        @include('/component/Address/form_add_address', ['city' => $city, 'district'=>$district, 'commune'=> $commune])
+    </div>
+    @else
+    <div class="form-add-cart w-2/5 m-auto border border-gray-300 p-4 absolute top-64 bg-white" id="myModal"
+        style="top:10rem;left:28rem;display: block;">
+        @include('/component/Address/form_add_address', ['city' => $city, 'district'=>$district, 'commune'=> $commune])
+    </div>
+    @endif
 </body>
-<script>
-
-</script>
 
 </html>

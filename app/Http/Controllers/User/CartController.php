@@ -19,7 +19,7 @@ class CartController extends Controller
                 Cart::create($id, $request->IDSanPham, $request->Number, $request->IDSize);
                 $cart = DB::table('giohang')->JOIN('sanpham', 'sanpham.IDSanPham', '=', 'giohang.IDSanPham')->JOIN('size', 'size.IDSize', '=', 'giohang.IDSize')->where("IDTaiKhoan", '=', $id)->get();
                 return response()->json([
-                    'view' => " " . view('/component/box_cart')->with('gh', $cart[0]),
+                    'view' => " " . view('/component/Cart/box_cart')->with('gh', $cart[0]),
                     'num' => count(Cart::where('IDTaiKhoan', '=', $id)->get())
                 ]);
             } else {
@@ -48,7 +48,7 @@ class CartController extends Controller
         $cart = DB::table('giohang')->where('IDTaiKhoan', '=', Session::get('user')[0]->IDTaiKhoan)->get();
         if (count($cart) <= 1) {
             DB::table('giohang')->where('STT', '=', $request->STT)->where('IDTaiKhoan', '=', Session::get('user')[0]->IDTaiKhoan)->delete();
-            return view('/component/form-not-cart');
+            return view('/component/Cart/form-not-cart');
         } else {
             DB::table('giohang')->where('STT', '=', $request->STT)->where('IDTaiKhoan', '=', Session::get('user')[0]->IDTaiKhoan)->delete();
             return '';

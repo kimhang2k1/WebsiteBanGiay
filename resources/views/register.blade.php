@@ -24,6 +24,28 @@
                     {{ csrf_field() }}
                     <div class="w-full my-8 ml-8">
                         <div class="w-full">
+                            <p class="font-bold text-sm">Họ Tên <span class="text-red-600">*</span></p>
+                        </div>
+                        <div class="w-full">
+                            <input class="border border-gray-300 h-10 w-96 mt-2 text-sm pl-4 " type="text" name="hoTen"
+                                value="@isset($register){{$register['hoTen']}}@endisset">
+                        </div>
+                        <p class="error-message pl-4 text-sm text-red-700 mt-2">{{ $errors->first('hoTen') }}</p>
+                        </p>
+                    </div>
+                    <div class="w-full my-8 ml-8">
+                        <div class="w-full">
+                            <p class="font-bold text-sm">Số điện thoại <span class="text-red-600">*</span></p>
+                        </div>
+                        <div class="w-full">
+                            <input class="border border-gray-300 h-10 w-96 mt-2 text-sm pl-4 " type="text" name="sdt"
+                                value="@isset($register){{$register['sdt']}}@endisset">
+                        </div>
+                        <p class="error-message pl-4 text-sm text-red-700 mt-2">{{ $errors->first('sdt') }}</p>
+                        </p>
+                    </div>
+                    <div class="w-full my-8 ml-8">
+                        <div class="w-full">
                             <p class="font-bold text-sm">Email <span class="text-red-600">*</span></p>
                         </div>
                         <div class="w-full">

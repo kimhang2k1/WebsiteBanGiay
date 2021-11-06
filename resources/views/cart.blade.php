@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/tailwind.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/tab.js"></script>
+    <script src="./js/product.js"></script>
     <script src="./js/cart.js"></script>
     <title>Giỏ Hàng</title>
 </head>
@@ -30,17 +31,17 @@
             </div>
             @if(count($shoppingCart) > 0)
             <div class="w-full" id="container">
-                @include('/component/all_product_cart', ['shoppingCart' => $shoppingCart])
+                @include('/component/Cart/all_product_cart', ['shoppingCart' => $shoppingCart])
             </div>
             @else
             <div class="w-full" id="container">
-                @include('/component/form-not-cart', ['shoppingCart' => $shoppingCart])
+                @include('/component/Cart/form-not-cart', ['shoppingCart' => $shoppingCart])
             </div>
             @endif
         </div>
     </div>
     <div class="content w-full h-screen fixed top-0 right-0 bg-black bg-opacity-50 hidden" id="my-cart">
-        @include('/component/box_cart')
+        @include('/component/Cart/box_cart')
     </div>
     @include('/component/footer')
 </body>

@@ -210,7 +210,7 @@
                     </div>
                     <div class="w-full">
                         <div class="all-product w-full flex mt-4 flex-wrap justify-between">
-                            @include('/component/allProduct', ['productbyID' => $productbyID])
+                            @include('/component/Product/allProduct', ['productbyID' => $productbyID])
                         </div>
                     </div>
 
@@ -219,7 +219,7 @@
         </div>
     </div>
     <div class="content w-full h-screen fixed top-0 right-0 bg-black bg-opacity-50 hidden" id="my-cart">
-        @include('/component/box_cart')
+        @include('/component/Cart/box_cart')
     </div>
     @include('/component/footer')
 </body>
