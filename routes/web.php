@@ -101,10 +101,13 @@ Route::get('/login', function () {
 });
 
 // Đăng Xuất
+
+
 Route::get('dangxuat', function () {
     Session::flush();
     return redirect()->to("home");
 });
+
 // Đăng ký
 Route::post('/check-account', [User\RegisterController::class, 'createAccount']);
 
@@ -122,21 +125,51 @@ Route::get('/admin/login', function () {
     return view('/Admin/Login');
 });
 
-Route::get('/admin/home', function () {
+Route::get('/admin/dashboard', function () {
     return view('/Admin/Home');
 });
 Route::post('/process-login', [Admin\LoginController::class, 'getLogin']);
 
-// Quản lý
+
+// Quản lý sản phẩm 
 
 Route::get('/admin/product-management', [Admin\ProductManagementController::class, 'getProductManagement']);
 
+Route::get('/get-search-product-in-shop', [Admin\ProductManagementController::class, 'getSearchProductInShop']);
+
+Route::get('/add-to-product-shop', [Admin\ProductManagementController::class, 'addProduct']);
+
+
+
+//Quản lý danh mục sản phẩm
+
 Route::get('/admin/category-management', [Admin\CategoryManagementController::class, 'getCategoryManagement']);
 
-Route::get('/admin/order-management', function () {
-    return view('/Admin/OrderManagement');
-});
+Route::get('/get-search-category', [Admin\CategoryManagementController::class, 'getSearchCategory']);
 
-Route::get('/admin/account-management', function () {
-    return view('/Admin/AccountManagement');
-});
+
+
+// Quản lý đơn hàng
+
+Route::get('/admin/order-management', [Admin\OrderManagementController::class, 'getOrderManagement']);
+
+Route::get('/get-search-order', [Admin\OrderManagementController::class, 'getSearchOrder']);
+
+
+
+
+//Quản lý tài khoản
+
+Route::get('/admin/account-management', [Admin\ManagementController::class, 'getAccountManagement']);
+
+Route::get('/get-search-account', [Admin\ManagementController::class, 'getSearchAccount']);
+
+
+
+
+
+//Quản lý khách hàng
+
+Route::get('/admin/customer-management', [Admin\ManagementController::class, 'getCustomerInformationManagement']);
+
+Route::get('/get-search-customer', [Admin\ManagementController::class, 'getSearchCustomer']);

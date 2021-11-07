@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/tailwind.css">
     <script src="/js/admin/admin.js"></script>
-    <title>Quản Lí Tài Khoản</title>
+    <title>Quản Lí Khách Hàng</title>
 </head>
 
 <body>
@@ -78,7 +78,7 @@
                         </div>
                     </a>
                     <a href="{{ url('/admin/account-management') }}">
-                        <div class="w-full flex py-4 pl-4  bg-gray-200 space-x-4 text-sm  hover:bg-gray-200">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
                             <div>
                                 <i class="fas fa-user"></i>
                             </div>
@@ -88,7 +88,7 @@
                         </div>
                     </a>
                     <a href="{{ url('/admin/customer-management') }}">
-                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm  bg-gray-200  hover:bg-gray-200">
                             <div>
                                 <i class="fas fa-users"></i>
                             </div>
@@ -121,20 +121,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="border border-gray-100 bg-white font-timenewroman managements" style="width: 78rem;">
+                <div class="w-full border-2 border-gray-100 bg-white font-timenewroman managements"
+                    style="width: 78rem;">
                     <div class="form">
-                        <h2 class="p-4 text-xl font-bold">Quản Lí Tài Khoản</h2>
+                        <h2 class="p-4 text-xl font-bold">Quản Lí Khách Hàng</h2>
                     </div>
                     <div class="w-full flex">
                         <div class="pl-4 flex">
                             <div class="input-search mr-1">
-                                <input class="text-sm pl-4 w-60 leading-8 rounded-md border border-gray-300" type="text"
-                                    name="search_account" placeholder="Mã Khách Hàng" oninput="SearchAccount()">
+                                <input class="text-sm pl-4 w-60 leading-8 rounded-md" style="border:1px solid #ccc;"
+                                    type="text" name="search_customer" placeholder="Mã / Tên Khách Hàng"
+                                    oninput="SearchCustomer()">
                             </div>
+
                         </div>
                     </div>
-                    <div class="px-4" id="page_account">
-                        @include('Admin/component/AccountCustomer', ['account' => $account])
+                    <div class="px-4" id="page_customer">
+                        @include('Admin/component/Customer', ['customer' => $customer])
                     </div>
 
                 </div>

@@ -1,4 +1,4 @@
-<div class="max-w-full overflow-x-auto w-full ml-1 mt-4" style="height:40em;">
+<div class="max-w-full overflow-x-auto w-full ml-1 mt-4">
     <table class="w-full text-sm">
         <tr class="font-bold">
             <td>ID Tài Khoản</td>
@@ -7,12 +7,14 @@
             <td>Email</td>
             <td>Mật Khẩu</td>
         </tr>
+        @foreach($account as $ac)
         <tr>
-            <td>KH1000001</td>
-            <td>Trà Thị Kim Hằng</td>
-            <td>098765432</td>
-            <td class="px-20">mona@gmail.com</td>
-            <td class="px-40">**********</td>
+            <td>{{ $ac->IDTaiKhoan}}</td>
+            <td>{{ $ac->Ten}}</td>
+            <td>0{{ $ac->SoDienThoai}}</td>
+            <td class="px-20">{{ $ac->Email}}</td>
+            <td class="px-20">{{ $ac->MatKhau}}</td>
         </tr>
+        @endforeach
     </table>
 </div>

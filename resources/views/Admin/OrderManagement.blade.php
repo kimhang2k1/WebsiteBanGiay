@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/tailwind.css">
+    <script src="/js/admin/admin.js"></script>
     <title>Quản Lí Đơn Hàng</title>
 </head>
 
@@ -27,7 +29,7 @@
                             <span class=" text-sm">Trà Thị Kim Hằng</span>
                         </div>
                         <div class="w-full">
-                            <span class="text-xs">admin@gmail.com</span>
+                            <span class="text-xs">hangtea@gmail.com</span>
                         </div>
                     </div>
                 </div>
@@ -35,54 +37,66 @@
                     <div class="w-full mb-4 pl-4">
                         <span class="font-bold">CHỨC NĂNG HỆ THỐNG</span>
                     </div>
-                    <div class="w-full flex py-4 pl-4 space-x-4 bg-gray-200 text-sm hover:bg-gray-200">
-                        <div>
-                            <i class="fas fa-home"></i>
+                    <a href="{{ url('/admin/dashboard') }}">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm hover:bg-gray-200">
+                            <div>
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div>
+                                <span>Bảng Điều Khiển</span>
+                            </div>
                         </div>
-                        <div>
-                            <span>Bảng Điều Khiển</span>
+                    </a>
+                    <a href="{{ url('/admin/product-management') }}">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm hover:bg-gray-200">
+                            <div>
+                                <i class="fa fa-table"></i>
+                            </div>
+                            <div>
+                                <span>Quản lý sản phẩm</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full flex py-4 pl-4 space-x-4 text-sm hover:bg-gray-200">
-                        <div>
-                            <i class="fa fa-table"></i>
+                    </a>
+                    <a href="{{ url('/admin/category-management') }}">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
+                            <div>
+                                <i class="fa fa-list-ul"></i>
+                            </div>
+                            <div>
+                                <span>Quản lý danh mục sản phẩm</span>
+                            </div>
                         </div>
-                        <div>
-                            <span>Quản lý sản phẩm</span>
+                    </a>
+                    <a href="{{ url('/admin/order-management') }}">
+                        <div class="w-full flex py-4 pl-4  bg-gray-200 space-x-4 text-sm  hover:bg-gray-200">
+                            <div>
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div>
+                                <span>Quản lý đơn hàng</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
-                        <div>
-                            <i class="fa fa-list-ul"></i>
+                    </a>
+                    <a href="{{ url('/admin/account-management') }}">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
+                            <div>
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <span>Quản lý tài khoản</span>
+                            </div>
                         </div>
-                        <div>
-                            <span>Quản lý danh mục sản phẩm</span>
+                    </a>
+                    <a href="{{ url('/admin/customer-management') }}">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
+                            <div>
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <span>Quản lý khách hàng</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
-                        <div>
-                            <i class="fas fa-box"></i>
-                        </div>
-                        <div>
-                            <span>Quản lý đơn hàng</span>
-                        </div>
-                    </div>
-                    <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
-                        <div>
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <span>Quản lý tài khoản</span>
-                        </div>
-                    </div>
-                    <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
-                        <div>
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div>
-                            <span>Quản lý khách hàng</span>
-                        </div>
-                    </div>
+                    </a>
                 </div>
 
             </div>
@@ -120,7 +134,7 @@
                         </div>
                     </div>
                     <div class="px-4" id="page-order">
-                        @include('Admin/component/AllOrderCustomer')
+                        @include('Admin/component/AllOrderCustomer', ['order'=> $order])
                     </div>
 
                 </div>

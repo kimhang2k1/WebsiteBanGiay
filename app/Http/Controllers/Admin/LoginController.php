@@ -38,7 +38,7 @@ class LoginController extends Controller
                 return view('/Admin/Login')->with('login', $request->all());
             } else if (count($account) != 0) {
                 Session::put('admin', $account);
-                return view('/Admin/Home')->with('account', $account);
+                return redirect()->to('/admin/dashboard')->send();
             }
         }
     }

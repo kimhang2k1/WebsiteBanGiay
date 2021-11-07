@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/tailwind.css">
-    <title>Quản lý sản phẩm</title>
+    <script src="/js/admin/admin.js"></script>
+    <title>Quản lý danh mục sản phẩm</title>
 </head>
 
 <body>
@@ -35,8 +37,8 @@
                     <div class="w-full mb-4 pl-4">
                         <span class="font-bold">CHỨC NĂNG HỆ THỐNG</span>
                     </div>
-                    <a href="{{ url('/admin/home') }}">
-                        <div class="w-full flex py-4 pl-4 space-x-4 bg-gray-200 text-sm hover:bg-gray-200">
+                    <a href="{{ url('/admin/dashboard') }}">
+                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm hover:bg-gray-200">
                             <div>
                                 <i class="fas fa-home"></i>
                             </div>
@@ -56,7 +58,7 @@
                         </div>
                     </a>
                     <a href="{{ url('/admin/category-management') }}">
-                        <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
+                        <div class="w-full flex py-4 pl-4  bg-gray-200 space-x-4 text-sm  hover:bg-gray-200">
                             <div>
                                 <i class="fa fa-list-ul"></i>
                             </div>
@@ -85,7 +87,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="{{ url('/admin/customer-management') }}">
                         <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
                             <div>
                                 <i class="fas fa-users"></i>
@@ -123,11 +125,19 @@
                     <div class="form">
                         <h2 class="p-4 text-xl font-bold">Quản Lí Danh Mục Sản Phẩm</h2>
                     </div>
-                    <div class="w-full flex">
-                        <div class="pl-4 flex" style="width: 80%;">
+                    <div class="w-full px-4 flex">
+                        <div class="pl-4 flex" style="width: 70%;">
                             <div class="input-search mr-1">
                                 <input class="text-sm pl-4 w-60 leading-8 rounded-md border border-gray-300" type="text"
-                                    name="search_category" placeholder="Mã / Tên Sản Phẩm" oninput="SearchCategory()">
+                                    name="search_category" placeholder="Mã / Tên Sản Phẩm"
+                                    oninput="getSearchCategory()">
+                            </div>
+                        </div>
+                        <div class="flex" style="width: 30%;">
+                            <div class="insert ">
+                                <button class="ring-2 text-white w-60 leading-8 rounded-sm text-sm"
+                                    style="background-color:#2e6da4;" type="button">
+                                    <i class="fas fa-plus-circle"></i> &nbsp;&nbsp;Thêm danh mục sản phẩm</button>
                             </div>
                         </div>
                     </div>

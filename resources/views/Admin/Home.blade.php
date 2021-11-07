@@ -86,7 +86,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="{{ url('/admin/customer-management') }}">
                         <div class="w-full flex py-4 pl-4 space-x-4 text-sm  hover:bg-gray-200">
                             <div>
                                 <i class="fas fa-users"></i>
