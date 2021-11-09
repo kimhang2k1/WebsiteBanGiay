@@ -18,12 +18,13 @@
             </td>
             <td>{{ $p->TenSP }}</td>
             <td>{{ $p->TenNhom }}</td>
-            <td>{{ $p->GiaSP }}</td>
+            <td>{{ number_format($p->GiaSP) }}</td>
             <td>{{ $p->TenThuongHieu }}</td>
             <td><span class="rounded-full text-white" style="background-color: lightseagreen;border:0;padding:6px;">Còn
                     Hàng</span></td>
             <td class="text-xl">
-                <i class="fas fa-pen-square" style="padding:8px;color:#2e6da4;" onclick="openFormEditProduct()"></i>
+                <i class="fas fa-pen-square" style="padding:8px;color:#2e6da4;"
+                    onclick="openFormEditProduct('{{ $p->IDSanPham}}')"></i>
                 <i class="fas fa-trash-alt" style="color:red;" onclick="deleteProduct1()"></i>
             </td>
         </tr>

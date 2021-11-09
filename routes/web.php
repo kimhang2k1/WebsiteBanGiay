@@ -137,7 +137,11 @@ Route::get('/admin/product-management', [Admin\ProductManagementController::clas
 
 Route::get('/get-search-product-in-shop', [Admin\ProductManagementController::class, 'getSearchProductInShop']);
 
-Route::get('/add-to-product-shop', [Admin\ProductManagementController::class, 'addProduct']);
+Route::post('/add-to-product-shop', [Admin\ProductManagementController::class, 'addProduct'])->name('add-to-product-shop');
+
+Route::get('/get-information-product', [Admin\ProductManagementController::class, 'getFormProduct']);
+
+Route::get('/edit-product', [Admin\ProductManagementController::class, 'getEditProduct']);
 
 
 
@@ -146,6 +150,14 @@ Route::get('/add-to-product-shop', [Admin\ProductManagementController::class, 'a
 Route::get('/admin/category-management', [Admin\CategoryManagementController::class, 'getCategoryManagement']);
 
 Route::get('/get-search-category', [Admin\CategoryManagementController::class, 'getSearchCategory']);
+
+Route::get('/add-category-product', [Admin\CategoryManagementController::class, 'addCategory']);
+
+Route::get('/get-information-category', [Admin\CategoryManagementController::class, 'getFormCategory']);
+
+Route::get('/edit-category-product', [Admin\CategoryManagementController::class, 'editCategory']);
+
+
 
 
 

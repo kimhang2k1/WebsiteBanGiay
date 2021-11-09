@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/tailwind.css">
-    <script src="/js/admin/admin.js"></script>
+    <script src="/js/Admin/admin.js"></script>
     <title>Quản lý danh mục sản phẩm</title>
 </head>
 
@@ -29,7 +29,7 @@
                             <span class=" text-sm">Trà Thị Kim Hằng</span>
                         </div>
                         <div class="w-full">
-                            <span class="text-xs">admin@gmail.com</span>
+                            <span class="text-xs">hangtea@gmail.com</span>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full border-2 border-gray-100 bg-white font-timenewroman managements">
+                <div class="w-full border-2 border-gray-100 bg-white font-timenewroman management-category">
                     <div class="form">
                         <h2 class="p-4 text-xl font-bold">Quản Lí Danh Mục Sản Phẩm</h2>
                     </div>
@@ -136,7 +136,7 @@
                         <div class="flex" style="width: 30%;">
                             <div class="insert ">
                                 <button class="ring-2 text-white w-60 leading-8 rounded-sm text-sm"
-                                    style="background-color:#2e6da4;" type="button">
+                                    style="background-color:#2e6da4;" type="button" onclick="openFormAdd('category')">
                                     <i class="fas fa-plus-circle"></i> &nbsp;&nbsp;Thêm danh mục sản phẩm</button>
                             </div>
                         </div>
@@ -144,8 +144,41 @@
                     <div class="px-4" id="page_category">
                         @include('Admin/component/CategoryProduct', ['category'=>$category])
                     </div>
-
-
+                </div>
+                <div class="form-add-category w-1/2 mt-6 px-4 m-auto hidden">
+                    <div class="title w-full font-serif p-4 text-black">
+                        <h2 class="text-2xl font-bold">Thêm Danh Mục Sản Phẩm Mới</h2>
+                    </div>
+                    <div class="container w-full mt-4 font-timenewroman pl-4 mt-6 pb-12">
+                        <div class="flex space-x-10 mb-4">
+                            <div>
+                                <span class="font-bold" style="color:#2e6da4;">Mã Nhóm </span>
+                            </div>
+                            <div>
+                                <input class="w-96 border border-gray-300 leading-10 rounded-md pl-4" type="text"
+                                    id="IDNSP" value="{{ $allCategory[0]->IDNhomSP  }}" disabled>
+                            </div>
+                        </div>
+                        <div class="flex space-x-8 mb-4">
+                            <div>
+                                <span class="font-bold" style="color:#2e6da4;">Tên Nhóm </span>
+                            </div>
+                            <div>
+                                <input class="w-96 money border border-gray-300 rounded-md leading-10 pl-4" type="text"
+                                    name="group" placeholder="Nhập tên nhóm sản phẩm">
+                            </div>
+                        </div>
+                        <div class="ml-32 mt-12 mb-4 pr-4">
+                            <button class="pl-8 pr-8 pb-1 pt-1 text-white ml-4" type="button"
+                                style="background-color: #2e6da4;border:1px solid #2e6da4;"
+                                onclick="addCategoryProduct()">Lưu</button>
+                            <button class=" pl-8 pr-8 pb-1 pt-1 text-current ml-4" type="button"
+                                style="border:1px solid #ccc;" onclick="closeModalAdd('category')">Bỏ qua</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-edit-category w-1/2 mt-6 px-4 m-auto hidden">
+                    @include('/Admin/component/FormEditCategoryProduct', ['informationCategory'=> $informationCategory])
                 </div>
             </div>
         </div>

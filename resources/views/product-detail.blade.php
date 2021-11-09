@@ -105,7 +105,7 @@
                         HÀNG</button>
                 </div>
                 <div class=" tabcontent w-full mt-4" id="decription">
-                    <h2 class="font-bold">GIÀY THỜI TRANG UNISEX FILA OAKMONT TR</h2>
+                    <!-- <h2 class="font-bold">GIÀY THỜI TRANG UNISEX FILA OAKMONT TR</h2>
                     <div class="w-full mt-4">
                         <p>Đôi giày với phần đế đồ sộ cân bằng với upper bằng chất liệu cao cấp tạo nên kiểu dáng
                             sang
@@ -118,7 +118,8 @@
                             <li>Chất liệu: Synthetic 70%, Polyester 30%</li>
                             <li>Đế cao su bền bỉ</li>
                         </ul>
-                    </div>
+                    </div> -->
+                    <?= $product[0]->MoTa ?>
                 </div>
                 <div class=" tabcontent w-full mt-4 leading-9 hidden " id="review">
                     <div class="w-full">

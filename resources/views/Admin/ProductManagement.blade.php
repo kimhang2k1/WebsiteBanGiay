@@ -122,11 +122,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="border border-gray-100 bg-white font-timenewroman managements hidden" style="width: 78rem;">
+                <div class="border border-gray-100 bg-white font-timenewroman management-product" style="width: 78rem;">
                     <div class="form">
                         <h2 class="p-4 text-xl font-bold">Quản Lí Sản Phẩm</h2>
                     </div>
-                    <div class="w-full flex">
+                    <div class="w-full flex px-4">
                         <div class="pl-4 flex" style="width: 70%;">
                             <div class="input-search">
                                 <input class=" text-sm pl-4 w-60 leading-8 rounded-md border border-gray-300"
@@ -145,28 +145,40 @@
                             </div>
 
                         </div>
-                        <div class="flex" style="width: 30%;">
+                        <div class="flex justify-end" style="width: 30%;">
                             <div class="insert ">
                                 <button class="ring-2 text-white w-40 leading-8 rounded-sm text-sm"
-                                    style="background-color:#2e6da4;" type="button">
+                                    style="background-color:#2e6da4;" type="button" onclick="openFromAdd('product')">
                                     <i class="fas fa-plus-circle"></i> &nbsp;&nbsp;Thêm sản phẩm </button>
-                            </div>
-                            <div class="file ml-4">
-                                <button class="text-white w-40 leading-8 rounded-sm text-sm"
-                                    style="background-color:green;border:0;" type="button">
-                                    <i class="fas fa-file-excel"></i> &nbsp;&nbsp;Nhập từ file </button>
                             </div>
                         </div>
                     </div>
                     <div class="px-4" id="product">
                         @include('Admin/component/AllProductInShop', ['product' => $product])
                     </div>
+                    <div class="w-full mt-4">
+                        <ul class="flex justify-center space-x-4">
+                            @for($i = 0; $i <= floor($length /10 );$i++) @if($page==$i) <li
+                                class="text-center border border-gray-300 rounded-full pt-1 w-8 h-8 bg-red-500 text-white">
+                                <a href="<?= url('admin/product-management?page=' . $i) ?>"><?= $i ?></a>
+                                </li>
+                                @else
+                                <li
+                                    class="text-center border border-gray-300 rounded-full pt-1 w-8 h-8 bg-13283f text-white">
+                                    <a href="<?= url('admin/product-management?page=' . $i) ?>"><?= $i ?></a>
+                                </li>
+                                @endif
+                                @endfor
+                        </ul>
+                    </div>
                 </div>
-                <div class="form-add-product w-full mt-6 px-4">
+                <div class="form-add-product w-full mt-6 px-4 hidden ">
                     <div class="title w-full font-serif p-4 text-black">
                         <h2 class="text-2xl font-bold">Thêm Sản Phẩm Mới</h2>
                     </div>
-                    <form action="" method="POST" enctype="multipart/form-data" id="myForm">
+                    <form action="<?= route('add-to-product-shop') ?> " method="POST" enctype="multipart/form-data"
+                        id="myForm">
+                        {{ csrf_field() }}
                         <div class="container w-full mt-4 font-timenewroman pl-4 mt-6 pb-12">
                             <div class="flex mb-4 space-x-16">
                                 <div>
@@ -216,16 +228,6 @@
                                         style="width: 35rem;" type="text" name="price" placeholder="Nhập giá sản phẩm">
                                 </div>
                             </div>
-                            <!-- <div class="flex space-x-4 mb-4">
-                                <div>
-                                    <span class="font-bold" style="color:#2e6da4;">Số Lượng </span>
-                                </div>
-                                <div>
-                                    <input class=" money border border-gray-300 rounded-md leading-10 pl-4 ml-12"
-                                        style="width: 35rem;" type="number" name="amount">
-                                </div>
-
-                            </div> -->
                             <div class="flex space-x-24 mb-4">
                                 <div>
                                     <span class="font-bold" style="color:#2e6da4;"> Mô tả </span>
@@ -234,6 +236,7 @@
                                     <textarea class="w-60  h-20 rounded-md" style="margin-left:4.5rem;"
                                         name="ckeditor"></textarea>
                                 </div>
+
                             </div>
                             <div class="mb-4 w-3/5 m-auto">
                                 <div>
@@ -243,7 +246,7 @@
                                 <div class="hidden" id="displayImg"
                                     style="width: 10rem;border:1px solid #ccc; margin-top:1rem;"></div>
                             </div>
-                            <div class=" mb-4">
+                            <!-- <div class=" mb-4">
                                 <span class="italic">Nếu muốn thêm ảnh để mô tả sản phẩm thì vui lòng bấm vào đây
                                 </span>
                                 <div class="w-full flex space-x-4 text-sm mt-6">
@@ -284,7 +287,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="flex space-x-4 mb-4">
                                 <div>
                                     <span class="font-bold" style="color:#2e6da4;">Trạng Thái </span>
@@ -297,22 +300,26 @@
                                 </div>
                             </div>
                             <div class="ml-32 mt-12 mb-4 pr-4">
-                                <button class="pl-8 pr-8 pb-1 pt-1 text-white ml-4" type="button"
-                                    style="background-color: #2e6da4;border:1px solid #2e6da4;"
-                                    onclick="addProduct()">Lưu</button>
-                                <button class="pl-8 pr-8 pb-1 pt-1  text-current ml-4" type="button"
-                                    style="border:1px solid #ccc;" onclick="closeModalAddProduct()">Bỏ qua</button>
+                                <button class="pl-8 pr-8 pb-1 pt-1 text-white ml-4" type="submit"
+                                    style="background-color: #2e6da4;border:1px solid #2e6da4;">Lưu</button>
+                                <button class=" pl-8 pr-8 pb-1 pt-1 text-current ml-4" type="button"
+                                    style="border:1px solid #ccc;" onclick="closeModalAdd('product')">Bỏ qua</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <div class="form-edit-product w-full mt-6 px-4 hidden">
+                    @include('/Admin/component/FormEditProduct', ['informationProduct' => $informationProduct,
+                    'category' => $category , 'brand' => $brand])
+                </div>
+
             </div>
         </div>
     </div>
     </div>
 </body>
 <script>
-CKEDITOR.replace('ckeditor');
+CKEDITOR.replace('ckeditor')
 </script>
 
 </html>
