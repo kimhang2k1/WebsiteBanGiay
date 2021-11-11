@@ -55,7 +55,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="w-full text-sm mt-4" onclick="openInformation(3)">
+                        <div class="flex">
+                            <div class="mr-5">
+                                <i class="text-gray-500 fas fa-file-invoice"></i>
+                            </div>
+                            <div>
+                                Đơn hàng đã hủy
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="w-4/5">
                     <div class="w-full bg-white mt-6">
@@ -95,12 +104,26 @@
                                     <span class="text-2xl font-bold">Đơn Hàng Của Tôi</span>
                                 </div>
                             </div>
-                            <div class="w-full">
+                            <div class="w-full" id="allOrder">
                                 @include('/component/Profile/OrderCustomer', ['order' =>$order])
                             </div>
                         </div>
                     </div>
+                    <div class="w-full">
+                        <div class="information w-full hidden border border-gray-300">
+                            <div class="w-full p-4 pb-16 bg-white  ">
+                                <div class="w-full flex justify-center">
+                                    <span class="text-2xl font-bold">Danh Sách Đơn Hàng Đã Hủy</span>
+                                </div>
+                            </div>
+                            <div class="w-full" id="allOrder">
+                                @include('/component/Profile/OrderCustomerCancel')
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-order-customer w-full hidden" id=" ">
 
+                    </div>
                 </div>
 
             </div>

@@ -88,6 +88,9 @@ Route::get('/edit-information-customer', [User\ProfileController::class, 'editIn
 
 Route::post('/change-password-customer', [User\ProfileController::class, 'changePassword']);
 
+Route::get('/get-information-product-order', [User\ProfileController::class, 'getInformationDetailProductOrder']);
+
+
 
 
 // Tài Khoản
@@ -101,7 +104,6 @@ Route::get('/login', function () {
 });
 
 // Đăng Xuất
-
 
 Route::get('dangxuat', function () {
     Session::flush();
@@ -143,6 +145,7 @@ Route::get('/get-information-product', [Admin\ProductManagementController::class
 
 Route::get('/edit-product', [Admin\ProductManagementController::class, 'getEditProduct']);
 
+Route::get('/delete-product', [Admin\ProductManagementController::class, 'deleteProduct']);
 
 
 //Quản lý danh mục sản phẩm
@@ -157,6 +160,7 @@ Route::get('/get-information-category', [Admin\CategoryManagementController::cla
 
 Route::get('/edit-category-product', [Admin\CategoryManagementController::class, 'editCategory']);
 
+Route::get('/delete-category-product', [Admin\CategoryManagementController::class, 'deleteCategoryProduct']);
 
 
 
@@ -167,8 +171,9 @@ Route::get('/admin/order-management', [Admin\OrderManagementController::class, '
 
 Route::get('/get-search-order', [Admin\OrderManagementController::class, 'getSearchOrder']);
 
+Route::get('/update-status-order', [Admin\OrderManagementController::class, 'updateOrder']);
 
-
+Route::get('/get-detail-order', [Admin\OrderManagementController::class, 'getInformationDetailOrder']);
 
 //Quản lý tài khoản
 

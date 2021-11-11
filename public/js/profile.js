@@ -130,3 +130,18 @@ function changePassword() {
         success: function (response) {},
     });
 }
+function getDetailOrder(IDDonHang) {
+    document.getElementsByClassName("detail-order-customer")[0].style.display =
+        "block";
+    document.getElementsByClassName("information")[2].style.display = "none";
+    $.ajax({
+        method: "GET",
+        url: "/get-information-product-order",
+        data: {
+            IDDonHang: IDDonHang,
+        },
+        success: function (response) {
+            $(".detail-order-customer").html(response);
+        },
+    });
+}

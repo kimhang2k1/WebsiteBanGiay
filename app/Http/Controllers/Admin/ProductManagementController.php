@@ -139,4 +139,8 @@ class ProductManagementController extends Controller
             return view('/Admin/component/AllProductInShop')->with('product', $product);
         }
     }
+    public function deleteProduct(Request $request)
+    {
+        DB::table('sanpham')->where('IDSanPham', '=', $request->IDSanPham)->delete();
+    }
 }

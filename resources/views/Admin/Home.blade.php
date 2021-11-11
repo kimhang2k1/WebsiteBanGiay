@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src='Chart.min.js'></script>
     <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/admin.css">
     <script src="/js/chart.js"></script>
     <title>Trang Chủ</title>
 </head>

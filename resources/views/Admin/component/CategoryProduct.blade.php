@@ -5,13 +5,13 @@
         <td>Tác vụ</td>
     </tr>
     @foreach($category as $c)
-    <tr>
+    <tr id="{{$c->IDNhomSP}}category">
         <td>{{ $c->IDNhomSP }}</td>
         <td>{{ $c->TenNhom}}</td>
         <td class="text-xl">
             <i class="fas fa-pen-square" style="padding:8px;color:#2e6da4;"
                 onclick="openFormEditCategory('{{ $c->IDNhomSP}}')"></i>
-            <i class="fas fa-trash-alt" style="color:red;" onclick="deleteCategoryProduct()"></i>
+            <i class="fas fa-trash-alt" style="color:red;" onclick="deleteCategoryProduct('{{$c->IDNhomSP }}')"></i>
         </td>
     </tr>
     @endforeach

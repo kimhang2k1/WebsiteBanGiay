@@ -48,4 +48,9 @@ class CategoryManagementController extends Controller
         $category = DB::table('nhomsanpham')->get();
         return view('/Admin/component/CategoryProduct')->with('category', $category);
     }
+
+    public function deleteCategoryProduct(Request $request)
+    {
+        DB::table('nhomsanpham')->where('IDNhomSP', '=', $request->IDNSP)->delete();
+    }
 }

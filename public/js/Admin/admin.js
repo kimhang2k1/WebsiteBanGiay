@@ -242,3 +242,64 @@ function closeModalEditCategory() {
     document.getElementsByClassName("management-category")[0].style.display =
         "block";
 }
+
+function deleteProduct(IDSanPham) {
+    $.ajax({
+        method: "GET",
+        url: "/delete-product",
+        data: {
+            IDSanPham: IDSanPham,
+        },
+        success: function (response) {
+            document.getElementById(IDSanPham + "product").remove();
+        },
+    });
+}
+
+function deleteCategoryProduct(IDNSP) {
+    $.ajax({
+        method: "GET",
+        url: "/delete-category-product",
+        data: {
+            IDNSP: IDNSP,
+        },
+        success: function (response) {
+            document.getElementById(IDNSP + "category").remove();
+        },
+    });
+}
+
+function updateOrder(IDDonHang) {
+    $.ajax({
+        method: "GET",
+        url: "/update-status-order",
+        data: {
+            IDDonHang: IDDonHang,
+            Status: document.getElementById("status").value,
+        },
+        success: function (response) {
+            $("#page-order").html(response);
+            document.getElementById("detail-order").style.display = "none";
+            document.getElementsByClassName(
+                "management-order"
+            )[0].style.display = "block";
+        },
+    });
+}
+
+function openDetailOrder(IDDonHang) {
+    document.getElementById("detail-order").style.display = "block";
+    document.getElementsByClassName("management-order")[0].style.display =
+        "none";
+
+    $.ajax({
+        method: "GET",
+        url: "/get-detail-order",
+        data: {
+            IDDonHang: IDDonHang,
+        },
+        success: function (response) {
+            $("#detail-order").html(response);
+        },
+    });
+}

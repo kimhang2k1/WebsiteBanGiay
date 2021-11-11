@@ -95,4 +95,10 @@ class ProfileController extends Controller
         Session::flush();
         return redirect()->to("login");
     }
+    public function getInformationDetailProductOrder(Request $request)
+    {
+        $id = Session::get('user')[0]->IDTaiKhoan;
+        $billCustomer =  DB::table('donhang')->where('IDTaiKhoan', '=', $id)->where('donhang.IDDonHang', '=', $request->IDDonHang)->get();
+        return view('/component/Profile/ReviewDetailOrder')->with('billCustomer', $billCustomer);
+    }
 }

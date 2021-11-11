@@ -15,7 +15,8 @@ class OrderDetail extends Model
         'IDSize',
         'GiaSP',
         'SoLuong',
-        'ThanhTien'
+        'ThanhTien',
+        'Status'
 
     ];
     public static function create(
@@ -25,6 +26,7 @@ class OrderDetail extends Model
         $GiaSP,
         $SoLuong,
         $ThanhTien,
+        $Status
 
 
 
@@ -37,6 +39,7 @@ class OrderDetail extends Model
         $ctdh->GiaSP = $GiaSP;
         $ctdh->SoLuong = $SoLuong;
         $ctdh->ThanhTien = $ThanhTien;
+        $ctdh->Status = $Status;
 
         $ctdh->save();
     }

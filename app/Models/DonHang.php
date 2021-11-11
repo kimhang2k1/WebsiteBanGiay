@@ -15,7 +15,7 @@ class DonHang extends Model
         'NgayDatHang',
         'NgayGiaoHang',
         'IDDiaChi',
-        'TrangThai'
+        'IDTrangThai'
 
     ];
     public static function create(
@@ -24,7 +24,7 @@ class DonHang extends Model
         $NgayDatHang,
         $NgayGiaoHang,
         $IDDiaChi,
-        $TrangThai,
+        $IDTrangThai,
 
 
 
@@ -36,7 +36,7 @@ class DonHang extends Model
         $dh->NgayDatHang = $NgayDatHang;
         $dh->NgayGiaoHang = $NgayGiaoHang;
         $dh->IDDiaChi = $IDDiaChi;
-        $dh->TrangThai = $TrangThai;
+        $dh->IDTrangThai = $IDTrangThai;
 
         $dh->save();
     }

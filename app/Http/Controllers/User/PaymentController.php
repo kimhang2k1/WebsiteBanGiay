@@ -37,7 +37,8 @@ class PaymentController extends Controller
 
 
 
-        return view('payment')->with('payment', $payment)->with('city', $city)->with('district', $district)->with('commune', $commune)->with('address', $addressOfCustomer)->with('addressDefault', $addressDefault);
+        return view('payment')->with('payment', $payment)->with('city', $city)->with('district', $district)->with('commune', $commune)->with('address', $addressOfCustomer)
+            ->with('addressDefault', $addressDefault);
     }
     public function orderProduct(Request $request)
     {
@@ -52,13 +53,13 @@ class PaymentController extends Controller
             $data = explode('DH', $string);
             $number = $data[1];
             $number++;
-            DonHang::create('DH' . $number, $id, $currentDateTime, $datetime->format('Y-m-d H:i:s'), $addressDefault[0]->IDDiaChi, 'Chưa Giao Hàng');
+            DonHang::create('DH' . $number, $id, $currentDateTime, $datetime->format('Y-m-d H:i:s'), $addressDefault[0]->IDDiaChi, '1');
         } else {
             $string = 'DH10000000';
             $data = explode('DH', $string);
             $number = $data[1];
             $number++;
-            DonHang::create('DH' . $number, $id, $currentDateTime, $datetime->format('Y-m-d H:i:s'), $addressDefault[0]->IDDiaChi, 'Chưa Giao Hàng');
+            DonHang::create('DH' . $number, $id, $currentDateTime, $datetime->format('Y-m-d H:i:s'), $addressDefault[0]->IDDiaChi, '1');
         }
         $cart = DB::table('giohang')->JOIN('sanpham', 'sanpham.IDSanPham', '=', 'giohang.IDSanPham')->JOIN('size', 'size.IDSize', '=', 'giohang.IDSize')->where('IDTaiKhoan', '=', $id)->get();
         foreach ($cart as $key => $value) {
@@ -70,9 +71,11 @@ class PaymentController extends Controller
                 $cart[$key]->IDSize,
                 $cart[$key]->GiaSP,
                 $cart[$key]->SoLuong,
-                $cart[$key]->GiaSP * $cart[$key]->SoLuong
+                $cart[$key]->GiaSP * $cart[$key]->SoLuong,
+                'Thành Công'
             );
             DB::table('giohang')->where('IDTaiKhoan', '=', $id)->where('STT', '=', $value->STT)->delete();
         }
+        return redirect()->to('/profile')->send();
     }
 }

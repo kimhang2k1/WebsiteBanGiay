@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/admin.css">
     <script src="/js/admin/admin.js"></script>
     <title>Quản Lí Đơn Hàng</title>
 </head>
@@ -121,7 +122,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border border-gray-300 bg-white font-timenewroman managements" style="width: 78rem;">
+                <div class="border border-gray-300 bg-white font-timenewroman management-order" style="width: 78rem;">
                     <div class="form">
                         <h2 class="p-4 text-xl font-bold">Quản Lí Đơn Hàng</h2>
                     </div>
@@ -136,6 +137,8 @@
                     <div class="px-4" id="page-order">
                         @include('Admin/component/AllOrderCustomer', ['order'=> $order])
                     </div>
+                </div>
+                <div class="w-full px-4 mt-4 hidden" id="detail-order">
 
                 </div>
             </div>

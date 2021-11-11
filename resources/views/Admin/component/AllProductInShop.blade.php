@@ -11,7 +11,7 @@
             <td>Tác vụ</td>
         </tr>
         @foreach($product as $p)
-        <tr>
+        <tr id="{{$p->IDSanPham}}product">
             <td>{{ $p->IDSanPham }}</td>
             <td>
                 <img class="w-24" src="/img/{{ $p->HinhAnh }}" class="ml-6" style="margin-top:1px;margin-bottom:2px;">
@@ -25,7 +25,7 @@
             <td class="text-xl">
                 <i class="fas fa-pen-square" style="padding:8px;color:#2e6da4;"
                     onclick="openFormEditProduct('{{ $p->IDSanPham}}')"></i>
-                <i class="fas fa-trash-alt" style="color:red;" onclick="deleteProduct1()"></i>
+                <i class="fas fa-trash-alt" style="color:red;" onclick="deleteProduct('{{$p->IDSanPham }}')"></i>
             </td>
         </tr>
         @endforeach

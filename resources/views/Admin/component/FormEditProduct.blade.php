@@ -1,7 +1,3 @@
-<head>
-    <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-
-</head>
 <div class="title w-full font-serif p-4 text-black">
     <h2 class="text-2xl font-bold">Chỉnh Sửa Sản Phẩm</h2>
 </div>
