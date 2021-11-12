@@ -44,10 +44,11 @@ class ProfileController extends Controller
             ->get();
 
         // hiển thị thông tin đơn hàng
-        $order = DB::table('donhang')->where('IDTaiKhoan', '=', $id)->get();
-
-        return view('profile')->with('addressOfCustomer', $addressOfCustomer)->with('addressDefault', $addressDefault)
-            ->with('order', $order)->with('city', $city)->with('district', $district)->with('commune', $commune)->with('infor', $infor)->with('profile', $profile);
+        $orderCustomer = DB::table('donhang')->whereRaw("not donhang.IDTrangThai = 5 and IDTaiKhoan = '" . $id . "' ")->get();
+        $orderCancel = DB::table('donhang')->whereRaw("donhang.IDTrangThai = 5 and IDTaiKhoan = '" . $id . "' ")->get();
+        return view('/User/Main/profile')->with('addressOfCustomer', $addressOfCustomer)->with('addressDefault', $addressDefault)
+            ->with('orderCustomer', $orderCustomer)->with('city', $city)->with('district', $district)->with('commune', $commune)
+            ->with('infor', $infor)->with('profile', $profile)->with('orderCancel', $orderCancel);
     }
 
     public function getInformationCustomer(Request $request)
@@ -63,7 +64,7 @@ class ProfileController extends Controller
         $district = DB::table('quanhuyen')->get();
 
         $commune = DB::table('xa')->where('IDQuan', '=', NULL)->get();
-        return view('/component/Address/form_edit_address')->with('infor', $infor)->with('city', $city)->with('district', $district)->with('commune', $commune);
+        return view('/User/component/Address/form_edit_address')->with('infor', $infor)->with('city', $city)->with('district', $district)->with('commune', $commune);
     }
 
     public function deleteAddressCustomer(Request $request)
@@ -72,7 +73,7 @@ class ProfileController extends Controller
         $addressOfCustomer = DB::table('diachikhachhang')->where('IDTaiKhoan', '=', $id)->get();
         if (count($addressOfCustomer) <= 1) {
             DB::table('diachikhachhang')->where('IDTaiKhoan', '=', $id)->where('IDDiaChi', '=', $request->IDDiaChi)->delete();
-            return view('/component/Address/NoAddress');
+            return view('/User/component/Address/NoAddress');
         } else {
             DB::table('diachikhachhang')->where('IDTaiKhoan', '=', $id)->where('IDDiaChi', '=', $request->IDDiaChi)->delete();
             return '';
@@ -84,7 +85,7 @@ class ProfileController extends Controller
         $id = Session::get('user')[0]->IDTaiKhoan;
         DB::update('update taikhoan set Ten = ?, SoDienThoai = ?, Email = ? where IDTaiKhoan = ?', [$request->TenKH, $request->SDT, $request->Email, $id]);
         $profile = DB::table('taikhoan')->where('IDTaiKhoan', '=', $id)->get();
-        return view('/component/Profile/Information')->with('profile', $profile);
+        return view('/User/component/Profile/Information')->with('profile', $profile);
     }
 
     public function changePassword(Request $request)
@@ -99,6 +100,14 @@ class ProfileController extends Controller
     {
         $id = Session::get('user')[0]->IDTaiKhoan;
         $billCustomer =  DB::table('donhang')->where('IDTaiKhoan', '=', $id)->where('donhang.IDDonHang', '=', $request->IDDonHang)->get();
-        return view('/component/Profile/ReviewDetailOrder')->with('billCustomer', $billCustomer);
+        return view('/User/component/Profile/ReviewDetailOrder')->with('billCustomer', $billCustomer);
+    }
+    public function cancelOrder(Request $request)
+    {
+        DB::update("update donhang set IDTrangThai = 5 where IDDonHang = ?", [$request->IDDonHang]);
+        $id = Session::get('user')[0]->IDTaiKhoan;
+        $orderCancel = DB::table('donhang')->where('IDTaiKhoan', '=', $id)->where('donhang.IDTrangThai', '=', '5')->get();
+
+        return view('/User/component/Profile/OrderCustomerCancel')->with('orderCancel', $orderCancel);
     }
 }

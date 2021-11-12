@@ -11,13 +11,13 @@ class ManagementController extends Controller
     public function getAccountManagement(Request $request)
     {
         $account = DB::table('taikhoan')->get();
-        return view('/Admin/AccountManagement')->with('account', $account);
+        return view('/Admin/PageMain/AccountManagement')->with('account', $account);
     }
 
     public function getSearchAccount(Request $request)
     {
         $searchByAccount = DB::table('taikhoan')->whereRaw("IDTaiKhoan LIKE '%" . $request->Search . "%'  ")->get();
-        return view('/Admin/component/AccountCustomer')->with('account', $searchByAccount);
+        return view('/Admin/component/Account/AccountCustomer')->with('account', $searchByAccount);
     }
 
 
@@ -27,7 +27,7 @@ class ManagementController extends Controller
             ->JOIN('tinhthanhpho', 'diachikhachhang.IDThanhPho', '=', 'tinhthanhpho.IDThanhPho')
             ->JOIN('quanhuyen', 'diachikhachhang.IDQuan', '=', 'quanhuyen.IDQuan')
             ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')->get();
-        return view('/Admin/CustomerManagement')->with('customer', $customer);
+        return view('/Admin/PageMain/CustomerManagement')->with('customer', $customer);
     }
 
     public function getSearchCustomer(Request $request)
@@ -36,6 +36,6 @@ class ManagementController extends Controller
             ->JOIN('tinhthanhpho', 'diachikhachhang.IDThanhPho', '=', 'tinhthanhpho.IDThanhPho')
             ->JOIN('quanhuyen', 'diachikhachhang.IDQuan', '=', 'quanhuyen.IDQuan')
             ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')->whereRaw("diachikhachhang.IDTaiKhoan LIKE '%" . $request->Search . "%'  ")->get();
-        return view('/Admin/component/Customer')->with('customer', $searchByCustomer);
+        return view('/Admin/component/Customer/Customer')->with('customer', $searchByCustomer);
     }
 }

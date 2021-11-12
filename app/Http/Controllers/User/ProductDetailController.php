@@ -15,18 +15,20 @@ class ProductDetailController extends Controller
     {
         $product = DB::table('sanpham')->where('IDSanPham', '=', $id)->get();
 
-        $size = DB::table('size')->get();
+        $comment = DB::table('danhgiasanpham')->JOIN('taikhoan', 'taikhoan.IDTaiKhoan', '=', 'danhgiasanpham.IDTaiKhoan')->where('IDSanPham', '=', $id)->get();
+        $size = DB::table('size')->limit(5)->get();
 
-        $productSame = DB::table('sanpham')->whereRaw("not IDSanPham = '" . $id . "' and IDThuongHieu = '" . $IDTH . "'")->get();
+        $sizeOther = DB::table('size')->limit(2)->offset(5)->get();
+
+        $productSame = DB::table('sanpham')->whereRaw("not IDSanPham = '" . $id . "' and IDThuongHieu = '" . $IDTH . "'")->limit(4)->get();
 
         $category = DB::table('nhomsanpham')->limit(3)->get();
 
-        $comment = DB::table('danhgiasanpham')->JOIN('taikhoan', 'taikhoan.IDTaiKhoan', '=', 'danhgiasanpham.IDTaiKhoan')->get();
 
         $imageDetail = DB::table('hinhanhchitiet')->where('IDSanPham', '=', $id)->get();
 
-        return view('product-detail')->with('product', $product)->with('productSame', $productSame)->with('category', $category)
-            ->with('imageDetail', $imageDetail)->with('size', $size)->with('comment', $comment);
+        return view('/User/Main/product-detail')->with('product', $product)->with('productSame', $productSame)->with('category', $category)
+            ->with('imageDetail', $imageDetail)->with('size', $size)->with('comment', $comment)->with('sizeOther', $sizeOther);
     }
 
     public function postComment(Request $request)
@@ -36,7 +38,7 @@ class ProductDetailController extends Controller
         $datetime = new DateTime($currentDateTime);
         Comment::create($request->IDSanPham, $id, $request->Comment, $datetime, $request->NumberStar);
 
-        $comment = DB::table('danhgiasanpham')->JOIN('taikhoan', 'taikhoan.IDTaiKhoan', '=', 'danhgiasanpham.IDTaiKhoan')->get();
-        return view('/component/Product/AllComment')->with('comment', $comment);
+        $comment = DB::table('danhgiasanpham')->JOIN('taikhoan', 'taikhoan.IDTaiKhoan', '=', 'danhgiasanpham.IDTaiKhoan')->where('IDSanPham', '=', $request->IDSanPham)->get();
+        return view('/User/component/Product/AllComment')->with('comment', $comment);
     }
 }

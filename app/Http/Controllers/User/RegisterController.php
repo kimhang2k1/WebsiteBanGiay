@@ -35,7 +35,7 @@ class RegisterController extends Controller
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return view('register')->withErrors($errors)->with('register', $request->all());
+            return view('/User/Main/register')->withErrors($errors)->with('register', $request->all());
         } else {
             $kh = DB::select('SELECT IDTaiKhoan FROM taikhoan ORDER BY IDTaiKhoan DESC');
             if (count($kh) > 0) {

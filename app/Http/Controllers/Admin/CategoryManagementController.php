@@ -15,14 +15,14 @@ class CategoryManagementController extends Controller
         $category = DB::table('nhomsanpham')->get();
 
         $allCategory = DB::table('nhomsanpham')->orderBy('IDNhomSP', 'DESC')->get();
-        return view('/Admin/CategoryManagement')->with('category', $category)->with('allCategory', $allCategory)->with('informationCategory', $informationCategory);
+        return view('/Admin/PageMain/CategoryManagement')->with('category', $category)->with('allCategory', $allCategory)->with('informationCategory', $informationCategory);
     }
 
     public function getSearchCategory(Request $request)
     {
         $searchByCategory = DB::table('nhomsanpham')->whereRaw("TenNhom LIKE '%" . $request->Search . "%' OR IDNhomSP LIKE '%" . $request->Search . "%'")
             ->get();
-        return view('/Admin/component/CategoryProduct')->with('category', $searchByCategory);
+        return view('/Admin/component/CategoryProduct/CategoryProduct')->with('category', $searchByCategory);
     }
     public function addCategory(Request $request)
     {
@@ -33,20 +33,20 @@ class CategoryManagementController extends Controller
         $IDSanPham++;
         CategoryProduct::create('NSP0000' . $IDSanPham, $request->TenNhom);
         $category = DB::table('nhomsanpham')->get();
-        return view('/Admin/component/CategoryProduct')->with('category', $category);
+        return view('/Admin/component/CategoryProduct/CategoryProduct')->with('category', $category);
     }
     public function getFormCategory(Request $request)
     {
         $informationCategory = DB::table('nhomsanpham')->where('IDNhomSP', '=', $request->IDNhomSP)->get();
 
 
-        return view('/Admin/component/FormEditCategoryProduct')->with('informationCategory', $informationCategory);
+        return view('/Admin/component/CategoryProduct/FormEditCategoryProduct')->with('informationCategory', $informationCategory);
     }
     public function editCategory(Request $request)
     {
         DB::update("update nhomsanpham set TenNhom = ? where IDNhomSP = ?", [$request->TenNhom, $request->IDNhomSP]);
         $category = DB::table('nhomsanpham')->get();
-        return view('/Admin/component/CategoryProduct')->with('category', $category);
+        return view('/Admin/component/CategoryProduct/CategoryProduct')->with('category', $category);
     }
 
     public function deleteCategoryProduct(Request $request)

@@ -25,17 +25,17 @@ class LoginController extends Controller
         );
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return view('/Admin/Login')->withErrors($errors)->with('login', $request->all());
+            return view('/Admin/PageMain/Login')->withErrors($errors)->with('login', $request->all());
         } else {
             $account = DB::table('admin')->where('Email', '=', $request->email)->where('MatKhau', '=', $request->password)->get();
             $check1 = DB::table('admin')->where('Email', '=', $request->email)->get();
             $check2 = DB::table('admin')->where('MatKhau', '=', $request->password)->get();
             if (count($check1) == 0) {
                 Session::flash('status1', 'Email không đúng');
-                return view('/Admin/Login')->with('login', $request->all());
+                return view('/Admin/PageMain/Login')->with('login', $request->all());
             } else if (count($check2) == 0) {
                 Session::flash('status2', 'Mật khẩu không đúng');
-                return view('/Admin/Login')->with('login', $request->all());
+                return view('/Admin/PageMain/Login')->with('login', $request->all());
             } else if (count($account) != 0) {
                 Session::put('admin', $account);
                 return redirect()->to('/admin/dashboard')->send();

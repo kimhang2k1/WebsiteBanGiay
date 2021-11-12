@@ -18,7 +18,7 @@ class OrderManagementController extends Controller
             ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')
             ->JOIN('trangthaidonhang', 'trangthaidonhang.IDTrangThai', '=', 'donhang.IDTrangThai')->get();
         $status = DB::table('trangthaidonhang')->get();
-        return view('/Admin/OrderManagement')->with('order', $order)->with('status', $status);
+        return view('/Admin/PageMain/OrderManagement')->with('order', $order)->with('status', $status);
     }
 
     public function getSearchOrder(Request $request)
@@ -32,7 +32,7 @@ class OrderManagementController extends Controller
                 ->JOIN('quanhuyen', 'diachikhachhang.IDQuan', '=', 'quanhuyen.IDQuan')
                 ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')->whereRaw("donhang.IDDonHang LIKE '%" . $request->Search . "%'")->get();
 
-            return view('/Admin/component/AllOrderCustomer')->with('order', $searchBYOrder);
+            return view('/Admin/component/Order/AllOrderCustomer')->with('order', $searchBYOrder);
         } else {
             $searchBYOrder = DB::table('donhang')->JOIN('chitietdonhang', 'donhang.IDDonHang', '=', 'chitietdonhang.IDDonHang')
                 ->JOIN('sanpham', 'sanpham.IDSanPham', '=', 'chitietdonhang.IDSanPham')
@@ -42,7 +42,7 @@ class OrderManagementController extends Controller
                 ->JOIN('quanhuyen', 'diachikhachhang.IDQuan', '=', 'quanhuyen.IDQuan')
                 ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')->get();
 
-            return view('/Admin/component/AllOrderCustomer')->with('order', $searchBYOrder);
+            return view('/Admin/component/Order/AllOrderCustomer')->with('order', $searchBYOrder);
         }
     }
     public function updateOrder(Request $request)
@@ -57,7 +57,7 @@ class OrderManagementController extends Controller
             ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')
             ->JOIN('trangthaidonhang', 'trangthaidonhang.IDTrangThai', '=', 'donhang.IDTrangThai')->get();
         $status = DB::table('trangthaidonhang')->get();
-        return view('/Admin/component/AllOrderCustomer')->with('order', $order)->with('status', $status);
+        return view('/Admin/component/Order/AllOrderCustomer')->with('order', $order)->with('status', $status);
     }
     public function getInformationDetailOrder(Request $request)
     {
@@ -73,6 +73,6 @@ class OrderManagementController extends Controller
             ->JOIN('size', 'chitietdonhang.IDSize', '=', 'size.IDSize')
             ->JOIN('trangthaidonhang', 'trangthaidonhang.IDTrangThai', '=', 'donhang.IDTrangThai')->where('donhang.IDDonHang', '=', $request->IDDonHang)->get();
         $status = DB::table('trangthaidonhang')->get();
-        return view('/Admin/component/DetailOrderCustomer')->with('inforOrder', $inforOrder)->with('detailOrder', $detailOrder)->with('status', $status);
+        return view('/Admin/component/Order/DetailOrderCustomer')->with('inforOrder', $inforOrder)->with('detailOrder', $detailOrder)->with('status', $status);
     }
 }

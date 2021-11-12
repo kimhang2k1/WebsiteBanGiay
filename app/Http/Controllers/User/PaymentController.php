@@ -37,7 +37,7 @@ class PaymentController extends Controller
 
 
 
-        return view('payment')->with('payment', $payment)->with('city', $city)->with('district', $district)->with('commune', $commune)->with('address', $addressOfCustomer)
+        return view('/User/Main/payment')->with('payment', $payment)->with('city', $city)->with('district', $district)->with('commune', $commune)->with('address', $addressOfCustomer)
             ->with('addressDefault', $addressDefault);
     }
     public function orderProduct(Request $request)

@@ -145,3 +145,20 @@ function getDetailOrder(IDDonHang) {
         },
     });
 }
+function cancelOrder(IDDonHang) {
+    $.ajax({
+        method: "GET",
+        url: "/cancel-order",
+        data: {
+            IDDonHang: IDDonHang,
+        },
+        success: function (response) {
+            document.getElementsByClassName("information")[3].style.display =
+                "block";
+            document.getElementsByClassName(
+                "detail-order-customer"
+            )[0].style.display = "none";
+            $("#allOrderCancel").html(response);
+        },
+    });
+}

@@ -19,7 +19,20 @@ use Illuminate\Support\Facades\Session;
 */
 
 // Trang chủ 
+
 Route::get('/home', [User\HomeController::class, 'getData']);
+
+// Giới Thiệu
+
+Route::get('/about-us', function () {
+    return view('/User/Main/about');
+});
+
+//Liên Hệ
+
+Route::get('/contact', function () {
+    return view('/User/Main/contact');
+});
 
 // Sản phẩm
 Route::get('/product', [User\ProductController::class, 'getProduct']);
@@ -90,6 +103,8 @@ Route::post('/change-password-customer', [User\ProfileController::class, 'change
 
 Route::get('/get-information-product-order', [User\ProfileController::class, 'getInformationDetailProductOrder']);
 
+Route::get('/cancel-order', [User\ProfileController::class, 'cancelOrder']);
+
 
 
 
@@ -100,7 +115,7 @@ Route::post('/handle-login', [User\LoginController::class, 'getAccount']);
 
 Route::get('/login', function () {
     $category = DB::table('nhomsanpham')->limit(3)->get();
-    return view('login')->with('category', $category);
+    return view('/User/Main/login')->with('category', $category);
 });
 
 // Đăng Xuất
@@ -114,7 +129,7 @@ Route::get('dangxuat', function () {
 Route::post('/check-account', [User\RegisterController::class, 'createAccount']);
 
 Route::get('/register', function () {
-    return view('register');
+    return view('/User/Main/register');
 });
 
 
@@ -124,13 +139,14 @@ Route::get('/register', function () {
 // Đăng Nhập
 
 Route::get('/admin/login', function () {
-    return view('/Admin/Login');
+    return view('/Admin/PageMain/Login');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('/Admin/Home');
-});
 Route::post('/process-login', [Admin\LoginController::class, 'getLogin']);
+
+// Dashboard
+
+Route::get('/admin/dashboard', [Admin\DashboardManagementController::class, 'getDashboard']);
 
 
 // Quản lý sản phẩm 

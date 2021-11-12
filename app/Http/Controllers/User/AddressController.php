@@ -64,7 +64,7 @@ class AddressController extends Controller
                 ->leftJOIN('quanhuyen', 'diachikhachhang.IDQuan', '=', 'quanhuyen.IDQuan')
                 ->leftJOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')->where('IDTaiKhoan', '=', $id)->get();
             return response()->json([
-                'view' => "" . view('/component/Address/delivery_address')->with('address', $addressOfCustomer)
+                'view' => "" . view('/User/component/Address/delivery_address')->with('address', $addressOfCustomer)
             ]);
         }
     }
@@ -80,7 +80,7 @@ class AddressController extends Controller
                 ->JOIN('quanhuyen', 'diachikhachhang.IDQuan', '=', 'quanhuyen.IDQuan')
                 ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')->where('diachimacdinh.IDTaiKhoan', '=', $id)->get();
 
-            return view('/component/Address/default_address')->with('addressDefault', $addressDefault);
+            return view('/User/component/Address/default_address')->with('addressDefault', $addressDefault);
         } else {
             AddressDefault::create($request->IDDiaChi, $id, 'Mặc Định');
             $addressDefault = AddressDefault::JOIN('diachikhachhang', 'diachikhachhang.IDDiaChi', '=', 'diachimacdinh.IDDiaChi')
@@ -88,7 +88,7 @@ class AddressController extends Controller
                 ->JOIN('quanhuyen', 'diachikhachhang.IDQuan', '=', 'quanhuyen.IDQuan')
                 ->JOIN('xa', 'diachikhachhang.IDXa', '=', 'xa.IDXa')->where('diachimacdinh.IDTaiKhoan', '=', $id)->get();
 
-            return view('/component/Address/default_address')->with('addressDefault', $addressDefault);
+            return view('/User/component/Address/default_address')->with('addressDefault', $addressDefault);
         }
     }
     public function editAddressCustomer(Request $request)
@@ -128,7 +128,7 @@ class AddressController extends Controller
                 ->whereRaw('diachikhachhang.IDTaiKhoan = "' . $id . '" and not IDDiaChi = "' . $addressDefault[0]->IDDiaChi . '"')
                 ->get();
             return response()->json([
-                'view' => "" . view('/component/Address/allAddress')->with('addressOfCustomer', $addressOfCustomer)->with('addressDefault', $addressDefault)
+                'view' => "" . view('/User/component/Address/allAddress')->with('addressOfCustomer', $addressOfCustomer)->with('addressDefault', $addressDefault)
             ]);
         }
     }

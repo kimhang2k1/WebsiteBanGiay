@@ -149,7 +149,7 @@ function editProduct(IDSanPham) {
         url: "/edit-product",
         data: {
             IDSanPham: IDSanPham,
-            IDNhomSP: document.getElementsByName("groupProduct")[0].value,
+            IDNhomSP: document.getElementById("groupProduct").value,
             IDThuongHieu: document.getElementsByName("thuongHieu")[0].value,
             TenSP: document.getElementById("nameProduct").value,
             GiaSP: document.getElementById("price").value,

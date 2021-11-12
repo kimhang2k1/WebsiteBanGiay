@@ -10,9 +10,9 @@ class HomeController extends Controller
 {
     public function getData(Request $request)
     {
-        $product_new = DB::table('sanpham')->skip(0)->take(8)->get();
-        $product_trend = DB::table('sanpham')->skip(8)->take(16)->get();
+        $product_new = DB::table('sanpham')->skip(0)->take(8)->orderBy('IDSanPham', 'DESC')->get();
+        $product_trend = DB::table('sanpham')->skip(8)->take(14)->get();
         $category = DB::table('nhomsanpham')->limit(3)->get();
-        return view('index')->with('product_new', $product_new)->with('product_trend', $product_trend)->with('category', $category);
+        return view('/User/Main/index')->with('product_new', $product_new)->with('product_trend', $product_trend)->with('category', $category);
     }
 }

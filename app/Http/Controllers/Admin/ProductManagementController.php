@@ -26,7 +26,7 @@ class ProductManagementController extends Controller
             ->where('sanpham.IDSanPham', '=', $request->IDSanPham)->get();
         $allProduct = DB::table('sanpham')->orderBy('IDSanPham', 'DESC')->get();
 
-        return view('/Admin/ProductManagement')->with('product', $product)->with('category', $category)->with('brand', $brand)
+        return view('/Admin/PageMain/ProductManagement')->with('product', $product)->with('category', $category)->with('brand', $brand)
             ->with('allProduct', $allProduct)->with('page', $page)->with('length', $length)->with('informationProduct', $informationProduct);
     }
 
@@ -39,7 +39,7 @@ class ProductManagementController extends Controller
                 ->whereRaw("TenSP LIKE '%" . $request->SearchProduct . "%' OR IDSanPham LIKE '%" . $request->SearchProduct . "%'")
                 ->where('sanpham.IDNhomSP', '=', $request->IDNhomSP)->orderby('sanpham.IDSanPham', 'ASC')->get();
 
-            return view('/Admin/Component/AllProductInShop')->with('product', $searchByProduct);
+            return view('/Admin/Component/Product/AllProductInShop')->with('product', $searchByProduct);
         } else if ($request->SearchProduct != NULL && $request->IDNhomSP == NULL) {
 
             $searchByProduct = DB::table('sanpham')->JOIN('nhomsanpham', 'sanpham.IDNhomSP', '=', 'nhomsanpham.IDNhomSP')
@@ -48,20 +48,20 @@ class ProductManagementController extends Controller
                 ->orderby('sanpham.IDSanPham', 'ASC')
                 ->get();
 
-            return view('/Admin/Component/AllProductInShop')->with('product', $searchByProduct);
+            return view('/Admin/Component/Product/AllProductInShop')->with('product', $searchByProduct);
         } else if ($request->SearchProduct == NULL && $request->IDNhomSP != NULL) {
 
             $searchByProduct = DB::table('sanpham')->JOIN('nhomsanpham', 'sanpham.IDNhomSP', '=', 'nhomsanpham.IDNhomSP')
                 ->JOIN('thuonghieu', 'sanpham.IDThuongHieu', '=', 'thuonghieu.IDThuongHieu')
                 ->where('sanpham.IDNhomSP', '=', $request->IDNhomSP)->orderby('sanpham.IDSanPham', 'ASC')->get();
-            return view('/Admin/Component/AllProductInShop')->with('product', $searchByProduct);
+            return view('/Admin/Component/Product/AllProductInShop')->with('product', $searchByProduct);
         } else if ($request->SearchProduct == NULL && $request->IDNhomSP == NULL) {
 
             $searchByProduct = DB::table('sanpham')->JOIN('nhomsanpham', 'sanpham.IDNhomSP', '=', 'nhomsanpham.IDNhomSP')
                 ->JOIN('thuonghieu', 'sanpham.IDThuongHieu', '=', 'thuonghieu.IDThuongHieu')
                 ->orderby('sanpham.IDSanPham', 'ASC')
                 ->get();
-            return view('/Admin/Component/AllProductInShop')->with('product', $searchByProduct);
+            return view('/Admin/Component/Product/AllProductInShop')->with('product', $searchByProduct);
         }
     }
 
@@ -94,7 +94,15 @@ class ProductManagementController extends Controller
             ->JOIN('thuonghieu', 'sanpham.IDThuongHieu', '=', 'thuonghieu.IDThuongHieu')->orderby('sanpham.IDSanPham', 'ASC')->get();
         $category = DB::table('nhomsanpham')->limit(3)->get();
         $brand = DB::table('thuonghieu')->get();
-        return view('/Admin/ProductManagement')->with('product', $product)->with('category', $category)->with('brand', $brand);
+        $page =  $request->page == NULL ? 0 : $request->page;
+        $length = sizeof(DB::table('sanpham')->JOIN('nhomsanpham', 'sanpham.IDNhomSP', '=', 'nhomsanpham.IDNhomSP')
+            ->JOIN('thuonghieu', 'sanpham.IDThuongHieu', '=', 'thuonghieu.IDThuongHieu')->orderby('sanpham.IDSanPham', 'ASC')->get());
+        $allProduct = DB::table('sanpham')->orderBy('IDSanPham', 'DESC')->get();
+        $informationProduct = DB::table('sanpham')->JOIN('nhomsanpham', 'sanpham.IDNhomSP', '=', 'nhomsanpham.IDNhomSP')
+            ->JOIN('thuonghieu', 'sanpham.IDThuongHieu', '=', 'thuonghieu.IDThuongHieu')->orderby('sanpham.IDSanPham', 'ASC')
+            ->where('sanpham.IDSanPham', '=', $request->IDSanPham)->get();
+        return view('/Admin/PageMain/ProductManagement')->with('product', $product)->with('category', $category)
+            ->with('brand', $brand)->with('length', $length)->with('page', $page)->with('allProduct', $allProduct)->with('informationProduct', $informationProduct);
     }
     public function getFormProduct(Request $request)
     {
@@ -104,7 +112,7 @@ class ProductManagementController extends Controller
         $category = DB::table('nhomsanpham')->limit(3)->get();
         $brand = DB::table('thuonghieu')->get();
 
-        return view('/Admin/component/FormEditProduct')->with('informationProduct', $informationProduct)->with('category', $category)->with('brand', $brand);
+        return view('/Admin/component/Product/FormEditProduct')->with('informationProduct', $informationProduct)->with('category', $category)->with('brand', $brand);
     }
 
     public function getEditProduct(Request $request)
@@ -125,7 +133,7 @@ class ProductManagementController extends Controller
                 ->JOIN('thuonghieu', 'sanpham.IDThuongHieu', '=', 'thuonghieu.IDThuongHieu')->orderby('sanpham.IDSanPham', 'ASC')
                 ->get();
 
-            return view('/Admin/component/AllProductInShop')->with('product', $product);
+            return view('/Admin/Component/Product/AllProductInShop')->with('product', $product);
         } else {
             DB::update(
                 "update sanpham set IDNhomSP = ?, TenSP = ? , GiaSP = ?, IDThuongHieu = ?, MoTa = ? where IDSanPham = ?",
@@ -136,7 +144,7 @@ class ProductManagementController extends Controller
             $product = DB::table('sanpham')->JOIN('nhomsanpham', 'sanpham.IDNhomSP', '=', 'nhomsanpham.IDNhomSP')
                 ->JOIN('thuonghieu', 'sanpham.IDThuongHieu', '=', 'thuonghieu.IDThuongHieu')->orderby('sanpham.IDSanPham', 'ASC')
                 ->get();
-            return view('/Admin/component/AllProductInShop')->with('product', $product);
+            return view('/Admin/Component/Product/AllProductInShop')->with('product', $product);
         }
     }
     public function deleteProduct(Request $request)

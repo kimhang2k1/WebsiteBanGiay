@@ -25,17 +25,17 @@ class LoginController extends Controller
         );
         if ($validator->fails()) {
             $errors = $validator->errors();
-            return view('login')->withErrors($errors)->with('login', $request->all());
+            return view('/User/Main/login')->withErrors($errors)->with('login', $request->all());
         } else {
             $tk = TaiKhoan::where('Email', '=', $request->email)->where('MatKhau', '=', md5($request->password))->get();
             $check1 = TaiKhoan::where('Email', '=', $request->email)->get();
             $check2 = TaiKhoan::where('MatKhau', '=', md5($request->password))->get();
             if (count($check1) == 0) {
                 Session::flash('status1', 'Email không đúng');
-                return view('login')->with('login', $request->all());
+                return view('/User/Main/login')->with('login', $request->all());
             } else if (count($check2) == 0) {
                 Session::flash('status2', 'Mật khẩu không đúng');
-                return view('login')->with('login', $request->all());
+                return view('/User/Main/login')->with('login', $request->all());
             } else if (count($tk) != 0) {
                 Session::put('user', $tk);
                 return redirect()->to('home')->send();
